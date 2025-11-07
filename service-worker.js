@@ -1,5 +1,8 @@
-// ✅ Versionierung für saubere Updates
-const CACHE_NAME = "zahlentiger-v1";
+// ✅ Version der installierten App
+const APP_VERSION = "v1.1.0";
+
+// ✅ Name des aktiven Caches (Version inkludiert)
+const CACHE_NAME = `zahlentiger-cache-${APP_VERSION}`;
 
 // ✅ Dateien, die offline verfügbar sein sollen
 const ASSETS = [
@@ -15,20 +18,21 @@ const ASSETS = [
   "./assets/icons/icon_512.png"
 ];
 
-// ✅ Install – Dateien in Cache laden
+// ✅ INSTALL – Dateien cachen
 self.addEventListener("install", event => {
-  console.log("📦 Service Worker installiert");
+  console.log(`📦 Installiere Service Worker ${APP_VERSION}`);
+
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(ASSETS);
-    })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
   );
-  self.skipWaiting();
+
+  self.skipWaiting(); // SW sofort aktiv machen
 });
 
-// ✅ Activate – alte Caches löschen
+// ✅ ACTIVATE – Alte Caches löschen
 self.addEventListener("activate", event => {
-  console.log("🧹 Alte Caches löschen…");
+  console.log("🧹 Lösche alte Caches…");
+
   event.waitUntil(
     caches.keys().then(keys =>
       Promise.all(
@@ -41,19 +45,28 @@ self.addEventListener("activate", event => {
       )
     )
   );
+
   self.clients.claim();
 });
 
-// ✅ Fetch – Cache First
+// ✅ FETCH – Cache first
 self.addEventListener("fetch", event => {
   event.respondWith(
     caches.match(event.request).then(cached => {
       return (
         cached ||
         fetch(event.request).catch(() => {
-          // Optional: Fallback-Seite / Fallback-Bild etc.
+          // Optional: Offline-Fallback
         })
       );
     })
   );
+});
+
+// ✅ COMMUNICATION – Browser informieren, dass neue Version bereit ist
+self.addEventListener("message", event => {
+  if (event.data === "skipWaiting") {
+    console.log("⏩ SkipWaiting ausgelöst");
+    self.skipWaiting();
+  }
 });

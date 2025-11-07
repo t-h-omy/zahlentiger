@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<link rel="manifest" href="manifest.json">
+<title>Zahlentiger</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<canvas id="confetti-canvas"></canvas>
+<div id="levelUpFlash"></div>
+<div id="mascotOverlay"><span id="mascot">🐶</span></div>
+
+<div id="container">
+  <div id="topBar">
+    <div id="level"><span id="levelIcon">🐶</span> <span id="levelName">Mathe-Welpe</span></div>
+    <div id="segmentContainer">
+      <div class="seg" id="seg0"></div>
+      <div class="seg" id="seg1"></div>
+      <div class="seg" id="seg2"></div>
+      <div class="seg" id="seg3"></div>
+      <div class="seg" id="seg4"></div>
+      <div class="seg" id="seg5"></div>
+      <div class="seg" id="seg6"></div>
+      <div class="seg" id="seg7"></div>
+      <div class="seg" id="seg8"></div>
+      <div class="seg" id="seg9"></div>
+    </div>
+    <div id="statusBadge"></div>
+  </div>
+
+  <button id="muteBtn">🔊 Ton aus</button>
+  <div id="aufgabe"></div>
+
+  <div id="inputRow">
+    <input id="eingabe" type="number" inputmode="numeric"/>
+    <button id="checkBtn">OK</button>
+  </div>
+
+  <div id="feedback"></div>
+</div>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+</script>
+<script src="game.js"></script>
+</body>
+</html>

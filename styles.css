@@ -1,0 +1,298 @@
+
+/* === styles.css – Teil 2a: Grundlayout, Farben, Container === */
+
+:root {
+  color-scheme: light dark;
+}
+
+/* Page base */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 18px;
+  text-align: center;
+  background: #fafafa;
+}
+
+#container, #app {
+  max-width: 540px;
+  margin: auto;
+  width: 100%;
+}
+
+/* Top bar */
+#topBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Level display */
+#level {
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Task text */
+#aufgabe {
+  font-size: 2rem;
+  margin: 12px 0;
+  word-wrap: break-word;
+}
+
+/* Input row */
+#inputRow {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+}
+
+#eingabe {
+  flex: 1;
+  min-width: 0;
+  font-size: 2.2rem;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+#checkBtn {
+  font-size: 1.6rem;
+  padding: 14px 22px;
+  border-radius: 14px;
+}
+
+/* Mute button */
+#muteBtn {
+  font-size: 1rem;
+  padding: 8px 14px;
+  margin: 10px 0 12px;
+  border-radius: 10px;
+}
+
+/* Feedback text */
+#feedback {
+  margin-top: 12px;
+  font-size: 1.4rem;
+  min-height: 2rem;
+}
+
+.ok { color: #128a12; font-weight: bold; }
+.enc { color: #ff8800; font-weight: bold; }
+.no { color: #d40000; font-weight: bold; }
+
+
+
+/* === styles.css – Teil 2b: Streak-Progressbar & Segmente === */
+
+/* Container für die 10 Streak-Segmente */
+#segmentContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 4px;
+  margin-top: 10px;
+}
+
+/* Einzelnes Segment */
+.seg {
+  flex: 1;
+  height: 26px;
+  border-radius: 6px;
+  background: #ccc;
+  transition: background 0.25s;
+}
+
+/* Farben:
+   Grün    (#00c400)  – normale richtige Antwort
+   Blau    (#006cff)  – Super Streak
+   Lila    (#a200ff)  – Mega Streak
+   Orange  (#ff8800)  – geretteter Streak
+*/
+
+
+/* === styles.css – Teil 2c: Badges (Super, Mega, Rescue) & Animationen === */
+
+/* Bereich über der Streak-Leiste */
+#statusBadge {
+  margin-top: 10px;
+  min-height: 1.9rem;
+  font-weight: bold;
+}
+
+/* Basis-Badge-Design */
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 1.1rem;
+}
+
+/* Super-Streak (Blau) */
+.badge-super {
+  background: #e7f0ff;
+  color: #0050c8;
+}
+
+/* Mega-Streak (Lila) */
+.badge-mega {
+  background: #efe1ff;
+  color: #6a00d6;
+}
+
+/* Rettet-den-Streak (Orange) */
+.badge-rescue {
+  background: #ffe7cc;
+  color: #b34700;
+}
+
+/* Erstes Auftreten von Super/Mega: blinkende Animation */
+.blink {
+  animation: badgeBlink 1000ms ease-in-out 2;
+}
+
+@keyframes badgeBlink {
+  0%   { transform: scale(1);    filter: brightness(1); }
+  25%  { transform: scale(1.10); filter: brightness(1.3); }
+  50%  { transform: scale(1);    filter: brightness(1); }
+  75%  { transform: scale(1.10); filter: brightness(1.3); }
+  100% { transform: scale(1);    filter: brightness(1); }
+}
+
+/* Rettet-den-Streak sollte pulsieren */
+.rescuePulse {
+  animation: rescueBlink 1200ms ease-in-out infinite alternate;
+}
+
+@keyframes rescueBlink {
+  0%   { transform: scale(1);    filter: brightness(1); }
+  100% { transform: scale(1.06); filter: brightness(1.25); }
+}
+
+
+/* === styles.css – Teil 2d: Konfetti, Level-Up-Overlay & Maskottchen-Animation === */
+
+/* Vollbild-Canvas für Konfetti */
+#confetti-canvas {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Level-Up Gold-Overlay */
+#levelUpFlash {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255,215,0,0.65);
+  display: none;
+  text-align: center;
+  padding-top: 40vh;
+  font-size: 2.1rem;
+  font-weight: bold;
+  pointer-events: none;
+  z-index: 9998;
+  animation: goldHold 4000ms ease-out;
+}
+
+@keyframes goldHold {
+  0%   { opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Maskottchen-Overlay */
+#mascotOverlay {
+  position: fixed;
+  bottom: 18vh;
+  left: 0;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: flex-end;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+#mascot {
+  font-size: 72px;
+  display: inline-block;
+  opacity: 0;
+}
+
+/* Höherer Sprung + weiches Bouncing */
+.mascotJump {
+  animation: mascotJump 1500ms ease-out forwards;
+}
+
+@keyframes mascotJump {
+  0%   { transform: translateY(260px) scaleY(0.85); opacity: 0; }
+  18%  { transform: translateY(-80px) scaleY(1.22); opacity: 1; }
+  36%  { transform: translateY(0)     scaleY(0.90); }
+  60%  { transform: translateY(-30px) scaleY(1.10); }
+  80%  { transform: translateY(0)     scaleY(0.97); }
+  100% { transform: translateY(0)     scaleY(1.00); opacity: 1; }
+}
+
+
+/* === styles.css – Teil 2e: Mobile-Optimierungen === */
+
+/* Safe-area handling for iOS notches */
+body {
+  padding-top: env(safe-area-inset-top, 18px);
+  padding-bottom: env(safe-area-inset-bottom, 18px);
+}
+
+/* Prevent layout shifting when the on-screen keyboard appears */
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* Reduce accidental zoom on mobile */
+input, button {
+  font-size: 1rem;
+  touch-action: manipulation;
+}
+
+/* Larger touch targets */
+button {
+  min-height: 46px;
+}
+
+/* Prevent mobile 'double-tap zoom' */
+* {
+  touch-action: pan-y;
+}
+
+/* Keep input visible above keyboard */
+#inputRow {
+  position: sticky;
+  bottom: 0;
+  background: #fafafa;
+  padding-bottom: 10px;
+  z-index: 20;
+}
+
+/* Support for dark/light theme sensors */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #1c1c1c;
+    color: #f4f4f4;
+  }
+  #inputRow {
+    background: #1c1c1c;
+  }
+}
+

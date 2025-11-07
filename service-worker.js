@@ -1,5 +1,5 @@
 // ✅ Version der installierten App
-const APP_VERSION = "v1.1.0";
+const APP_VERSION = "v1.2.0";
 
 // ✅ Name des aktiven Caches (Version inkludiert)
 const CACHE_NAME = `zahlentiger-cache-${APP_VERSION}`;

@@ -1,38 +1,59 @@
+// ✅ Versionierung für saubere Updates
+const CACHE_NAME = "zahlentiger-v1";
 
-/* === service-worker.js – Offline Cache für Zahlentiger === */
-
-const CACHE_NAME = "zahlentiger-cache-v1";
-
+// ✅ Dateien, die offline verfügbar sein sollen
 const ASSETS = [
   "./",
   "./index.html",
-  "./styles.css",
-  "./game.js",
   "./manifest.json",
-  "./icon_192.png",
-  "./icon_256.png",
-  "./icon_384.png",
-  "./icon_512.png"
+  "./css/styles.css",
+  "./js/game.js",
+  "./js/sw-register.js",
+  "./assets/icons/icon_192.png",
+  "./assets/icons/icon_256.png",
+  "./assets/icons/icon_384.png",
+  "./assets/icons/icon_512.png"
 ];
 
-self.addEventListener("install", e => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+// ✅ Install – Dateien in Cache laden
+self.addEventListener("install", event => {
+  console.log("📦 Service Worker installiert");
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      return cache.addAll(ASSETS);
+    })
   );
   self.skipWaiting();
 });
 
-self.addEventListener("activate", e => {
-  e.waitUntil(
+// ✅ Activate – alte Caches löschen
+self.addEventListener("activate", event => {
+  console.log("🧹 Alte Caches löschen…");
+  event.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.map(k => (k !== CACHE_NAME ? caches.delete(k) : null)))
+      Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            console.log("❌ Lösche Cache:", key);
+            return caches.delete(key);
+          }
+        })
+      )
     )
   );
   self.clients.claim();
 });
 
-self.addEventListener("fetch", e => {
-  e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request))
+// ✅ Fetch – Cache First
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    caches.match(event.request).then(cached => {
+      return (
+        cached ||
+        fetch(event.request).catch(() => {
+          // Optional: Fallback-Seite / Fallback-Bild etc.
+        })
+      );
+    })
   );
 });

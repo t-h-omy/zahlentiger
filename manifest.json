@@ -1,17 +1,31 @@
-
 {
   "name": "Zahlentiger",
   "short_name": "Zahlentiger",
-  "start_url": "index.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
   "background_color": "#ffffff",
-  "theme_color": "#ff9900",
+  "theme_color": "#ffffff",
   "icons": [
-    { "src": "icon_192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icon_256.png", "sizes": "256x256", "type": "image/png" },
-    { "src": "icon_384.png", "sizes": "384x384", "type": "image/png" },
-    { "src": "icon_512.png", "sizes": "512x512", "type": "image/png" }
+    {
+      "src": "./assets/icons/icon_192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icons/icon_256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icons/icon_384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "./assets/icons/icon_512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }

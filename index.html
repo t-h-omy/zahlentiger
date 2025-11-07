@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
     <title>Zahlentiger</title>
 
-    <!-- Styles -->
+    <!-- ✅ CORRECTED PATH -->
     <link rel="stylesheet" href="./css/styles.css">
 
-    <!-- Manifest -->
+    <!-- ✅ PWA MANIFEST (korrekter Pfad) -->
     <link rel="manifest" href="./manifest.json">
 
-    <!-- iOS Icon -->
+    <!-- ✅ iOS ICON -->
     <link rel="apple-touch-icon" href="./assets/icons/icon_192.png">
 
     <!-- No-cache header -->
@@ -20,6 +21,7 @@
 
 <body>
 
+<!-- ✅ UPDATE BANNER (neu) -->
 <div id="updateBanner" 
      style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
             background:#ffcc00; color:#000; padding:15px 25px; border-radius:10px;
@@ -31,25 +33,50 @@
     </button>
 </div>
 
-<div class="container">
-    <h1 class="title">Mathe-Welpe</h1>
+<!-- ✅ ORIGINAL, FUNKTIONIERENDER GAME-UI-CODE -->
+<canvas id="confetti-canvas"></canvas>
+<div id="levelUpFlash"></div>
+<div id="mascotOverlay"><span id="mascot">🐶</span></div>
 
-    <div id="taskBox" class="task-box">?</div>
+<div id="container">
+  <div id="topBar">
+    <div id="level">
+        <span id="levelIcon">🐶</span> 
+        <span id="levelName">Mathe-Welpe</span>
+    </div>
 
-    <input id="answerInput" type="number" class="answer-input" placeholder="Antwort..." />
+    <div id="segmentContainer">
+      <div class="seg" id="seg0"></div>
+      <div class="seg" id="seg1"></div>
+      <div class="seg" id="seg2"></div>
+      <div class="seg" id="seg3"></div>
+      <div class="seg" id="seg4"></div>
+      <div class="seg" id="seg5"></div>
+      <div class="seg" id="seg6"></div>
+      <div class="seg" id="seg7"></div>
+      <div class="seg" id="seg8"></div>
+      <div class="seg" id="seg9"></div>
+    </div>
 
-    <button id="okButton" class="ok-button">OK</button>
+    <div id="statusBadge"></div>
+  </div>
 
-    <div id="streakDisplay" class="streak-display">Streak: 0</div>
+  <button id="muteBtn">🔊 Ton aus</button>
+  <div id="aufgabe"></div>
 
-    <button id="soundToggle" class="sound-toggle">Ton aus</button>
+  <div id="inputRow">
+    <input id="eingabe" type="number" inputmode="numeric"/>
+    <button id="checkBtn">OK</button>
+  </div>
 
-    <div id="confetti"></div>
+  <div id="feedback"></div>
 </div>
 
-<!-- ✅ JavaScript -->
-<script src="./js/game.js"></script>
+<!-- ✅ SERVICE WORKER REGISTRATION (neu & korrekt) -->
 <script src="./js/sw-register.js"></script>
+
+<!-- ✅ GAME LOGIC (korrekte Ordnerstruktur) -->
+<script src="./js/game.js"></script>
 
 </body>
 </html>

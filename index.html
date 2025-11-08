@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>Zahlentiger</title>
 
-  <!-- 🧩 CSS -->
-  <link rel="stylesheet" href="./css/styles.css">
+  <!-- 🎨 Styles -->
+  <link rel="stylesheet" href="./css/styles.css" />
 
-  <!-- 🧭 Manifest (PWA – aktuell Service Worker deaktiviert) -->
-  <link rel="manifest" href="./manifest.json">
+  <!-- 📱 Manifest & PWA setup -->
+  <link rel="manifest" href="./manifest.json" />
   <meta name="theme-color" content="#ffcc00" />
 
   <!-- 🐯 Icons -->
@@ -17,13 +17,16 @@
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon_192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/icon_512.png" />
 
-  <!-- 🚫 Cache-Schutz während Refactor -->
+  <!-- 🧭 Ensure correct relative paths for GitHub Pages -->
+  <base href="./" />
+
+  <!-- 🚫 Disable aggressive caching during dev -->
   <meta http-equiv="Cache-Control" content="no-store" />
 </head>
 
 <body>
 
-  <!-- 🟡 Update-Banner (wird später vom neuen SW wieder aktiviert) -->
+  <!-- 🟡 Update banner -->
   <div id="updateBanner"
        style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
               background:#ffcc00; color:#000; padding:15px 25px; border-radius:10px;
@@ -35,7 +38,7 @@
     </button>
   </div>
 
-  <!-- 🎮 SPIELBEREICH -->
+  <!-- 🎮 Game area -->
   <canvas id="confetti-canvas"></canvas>
   <div id="levelUpFlash"></div>
   <div id="mascotOverlay"><span id="mascot">🐶</span></div>
@@ -73,21 +76,3 @@
 
     <div id="feedback"></div>
   </div>
-
-  <!-- 🧠 JAVASCRIPT – MVVM-Struktur -->
-  <!-- Import-Chain:
-        game.js → main.js → viewmodel/ → model/ + view/
-  -->
-  <script type="module" src="./js/game.js"></script>
-
-  <!-- ❌ Service Worker aktuell deaktiviert -->
-  <!--
-  <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js');
-  }
-  </script>
-  -->
-
-</body>
-</html>

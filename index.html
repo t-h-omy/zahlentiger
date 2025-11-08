@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -17,7 +17,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon_192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/icon_512.png" />
 
-  <!-- 🚫 Temporary: disable cache during refactor -->
+  <!-- 🚫 Disable caching during refactor -->
   <meta http-equiv="Cache-Control" content="no-store" />
 </head>
 
@@ -27,10 +27,10 @@
        style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
               background:#ffcc00; color:#000; padding:15px 25px; border-radius:10px;
               box-shadow:0 4px 10px rgba(0,0,0,0.3); font-size:18px; z-index:9999;">
-    New version available
+    Neue Version verfügbar
     <button onclick="location.reload()"
             style="margin-left:15px; padding:5px 10px; font-size:16px;">
-      Refresh
+      Aktualisieren
     </button>
   </div>
 
@@ -43,7 +43,7 @@
     <div id="topBar">
       <div id="level">
         <span id="levelIcon">🐶</span>
-        <span id="levelName">Math Pup</span>
+        <span id="levelName">Mathe-Welpe</span>
       </div>
 
       <div id="segmentContainer">
@@ -62,11 +62,11 @@
       <div id="statusBadge"></div>
     </div>
 
-    <button id="muteBtn">🔊 Sound off</button>
+    <button id="muteBtn">🔊 Ton aus</button>
     <div id="aufgabe"></div>
 
     <div id="inputRow">
-      <input id="eingabe" type="number" inputmode="numeric" />
+      <input id="eingabe" type="number" inputmode="numeric" placeholder="Antwort..." />
       <button id="checkBtn">OK</button>
     </div>
 
@@ -74,7 +74,7 @@
   </div>
 
   <!-- 🧠 JavaScript entry point -->
-  <!-- main.js loads the ViewModel layer and initializes bindings + game logic -->
+  <!-- Loads the MVVM setup: ViewModel → Model + View -->
   <script type="module" src="./js/main.js"></script>
 </body>
 </html>

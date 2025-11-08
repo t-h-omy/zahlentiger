@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -8,7 +8,7 @@
   <!-- 🎨 Styles -->
   <link rel="stylesheet" href="./css/styles.css" />
 
-  <!-- 📱 Manifest & PWA setup -->
+  <!-- 📱 PWA Manifest -->
   <link rel="manifest" href="./manifest.json" />
   <meta name="theme-color" content="#ffcc00" />
 
@@ -17,28 +17,24 @@
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon_192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/icon_512.png" />
 
-  <!-- 🧭 Ensure correct relative paths for GitHub Pages -->
-  <base href="./" />
-
-  <!-- 🚫 Disable aggressive caching during dev -->
+  <!-- 🚫 Temporary: disable cache during refactor -->
   <meta http-equiv="Cache-Control" content="no-store" />
 </head>
 
 <body>
-
-  <!-- 🟡 Update banner -->
+  <!-- 🟡 Update Banner -->
   <div id="updateBanner"
        style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
               background:#ffcc00; color:#000; padding:15px 25px; border-radius:10px;
               box-shadow:0 4px 10px rgba(0,0,0,0.3); font-size:18px; z-index:9999;">
-    Neue Version verfügbar
+    New version available
     <button onclick="location.reload()"
             style="margin-left:15px; padding:5px 10px; font-size:16px;">
-      Aktualisieren
+      Refresh
     </button>
   </div>
 
-  <!-- 🎮 Game area -->
+  <!-- 🎮 Game Area -->
   <canvas id="confetti-canvas"></canvas>
   <div id="levelUpFlash"></div>
   <div id="mascotOverlay"><span id="mascot">🐶</span></div>
@@ -47,7 +43,7 @@
     <div id="topBar">
       <div id="level">
         <span id="levelIcon">🐶</span>
-        <span id="levelName">Mathe-Welpe</span>
+        <span id="levelName">Math Pup</span>
       </div>
 
       <div id="segmentContainer">
@@ -66,7 +62,7 @@
       <div id="statusBadge"></div>
     </div>
 
-    <button id="muteBtn">🔊 Ton aus</button>
+    <button id="muteBtn">🔊 Sound off</button>
     <div id="aufgabe"></div>
 
     <div id="inputRow">
@@ -76,3 +72,9 @@
 
     <div id="feedback"></div>
   </div>
+
+  <!-- 🧠 JavaScript entry point -->
+  <!-- main.js loads the ViewModel layer and initializes bindings + game logic -->
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>

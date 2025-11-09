@@ -79,11 +79,36 @@
 
   <!-- 🔧 Register Service Worker -->
   <script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js')
-      .then(() => console.log('Service Worker registered'))
-      .catch(err => console.error('Service Worker registration failed:', err));
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(reg => {
+        console.log("Service Worker registered");
+  
+        // ask SW for current version
+        setInterval(async () => {
+          const sw = await navigator.serviceWorker.ready;
+          sw.active.postMessage({ type: "CHECK_VERSION" });
+        }, 15000);
+  
+        navigator.serviceWorker.addEventListener("message", e => {
+          if (e.data?.type === "VERSION") {
+            const stored = localStorage.getItem("appVersion") || "0";
+            const remote = e.data.version;
+            if (remote !== stored) {
+              localStorage.setItem("appVersion", remote);
+              showUpdateBanner();
+            }
+          }
+        });
+      })
+      .catch(err => console.error("SW registration failed:", err));
+  }
+  
+  function showUpdateBanner() {
+    const b = document.getElementById("updateBanner");
+    if (b) b.style.display = "block";
   }
   </script>
+
 </body>
 </html>

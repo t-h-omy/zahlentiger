@@ -12,7 +12,11 @@ export function setupBindings() {
 
   if (checkBtn) {
     checkBtn.onclick = () => checkAnswer();
-    checkBtn.ontouchstart = () => focusInputIOS(); // 👈 ensures keyboard opens on touch
+    checkBtn.ontouchstart = (event) => {
+      event.preventDefault();
+      focusInputIOS();
+      checkAnswer();
+    }; // 👈 ensures keyboard opens on touch
   }
 
   if (input) {

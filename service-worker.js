@@ -1,5 +1,6 @@
 // === service-worker.js ===
-// Handles offline caching and automatic version update detection for Zahlentiger.
+// Offline caching and automatic update detection for Zahlentiger.
+// UI text remains in German; comments are in English.
 
 const VERSION_URL = './VERSION.txt'; // must exist in repo root
 const CACHE_PREFIX = 'zahlentiger-cache';
@@ -65,7 +66,7 @@ self.addEventListener('fetch', event => {
   );
 });
 
-// --- Message handler: check version & notify clients ---
+// --- Message handler: version check ---
 self.addEventListener('message', async event => {
   if (!event.data) return;
   if (event.data.type === 'CHECK_VERSION') {

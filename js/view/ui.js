@@ -1,5 +1,5 @@
 // === view/ui.js ===
-// Pure DOM updates: segments, badges, task text, level labels.
+// Pure DOM updates: segments, badges, task text, level labels, version info.
 
 import {
   LEVEL_NAMES,
@@ -10,6 +10,22 @@ import {
 } from "../model/balancing.js";
 import { gameState } from "../model/state.js";
 
+// --- New: display app version from VERSION.txt ---
+export async function updateVersionDisplay() {
+  const el = document.getElementById("appVersion");
+  if (!el) return;
+  try {
+    const res = await fetch("./VERSION.txt", { cache: "no-store" });
+    if (!res.ok) throw new Error("VERSION.txt not found");
+    const version = (await res.text()).trim();
+    el.textContent = "v" + version;
+  } catch (err) {
+    console.warn("[UI] Version info unavailable:", err);
+    el.textContent = "Dev-Version";
+  }
+}
+
+// --- Segments / progress bar ---
 export function updateSegments() {
   // Reset all segments to neutral
   for (let i = 0; i < 10; i++) {
@@ -40,6 +56,7 @@ export function updateSegments() {
     LEVEL_ICONS[gameState.levelIndex];
 }
 
+// --- Badges ---
 export function updateBadge() {
   const badge = document.getElementById("statusBadge");
   badge.innerHTML = "";
@@ -57,6 +74,7 @@ export function updateBadge() {
   }
 }
 
+// --- Badge blink animation ---
 export function triggerBadgeBlink(kind) {
   const badge = document.querySelector("#statusBadge .badge");
   if (!badge) return;
@@ -72,11 +90,13 @@ export function triggerBadgeBlink(kind) {
   }
 }
 
+// --- Task display ---
 export function setTaskText(text) {
   const el = document.getElementById("aufgabe");
   if (el) el.textContent = text;
 }
 
+// --- Input & feedback handling ---
 export function resetInputAndFeedback(blockFocus) {
   const input = document.getElementById("eingabe");
   if (!input) return;
@@ -101,6 +121,7 @@ export function setFeedback(text, className) {
   fb.className = className || "";
 }
 
+// --- Level-up flash ---
 export function showLevelUpFlash(newLevelName) {
   const flash = document.getElementById("levelUpFlash");
   if (!flash) return;

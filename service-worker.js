@@ -37,11 +37,9 @@ self.addEventListener('activate', event => {
       return Promise.all(
         keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
-
 // Fetch phase – serve from cache, then network fallback
 self.addEventListener('fetch', event => {
   event.respondWith(

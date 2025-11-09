@@ -34,6 +34,7 @@ export function focusInputIOS() {
 
   if (isiOS) {
     // Trick: short-lived invisible input to unlock keyboard focus
+    if (!document.body) return;
     const tmp = document.createElement("input");
     tmp.style.position = "absolute";
     tmp.style.opacity = 0;

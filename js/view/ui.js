@@ -1,5 +1,5 @@
 // === view/ui.js ===
-// Pure DOM updates: segments, badges, task text, level labels, version info.
+// Pure DOM updates: segments, badges, task text, level labels, version info, iOS focus helper.
 
 import {
   LEVEL_NAMES,
@@ -10,7 +10,7 @@ import {
 } from "../model/balancing.js";
 import { gameState } from "../model/state.js";
 
-// --- New: display app version from VERSION.txt ---
+// --- Display app version from VERSION.txt ---
 export async function updateVersionDisplay() {
   const el = document.getElementById("appVersion");
   if (!el) return;
@@ -25,16 +25,41 @@ export async function updateVersionDisplay() {
   }
 }
 
+// --- iOS Keyboard Focus Helper ---
+export function focusInputIOS() {
+  const input = document.getElementById("eingabe");
+  if (!input) return;
+
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  const isiOS = /iPad|iPhone|iPod/.test(ua);
+
+  if (isiOS) {
+    // Trick: short-lived invisible input to unlock keyboard focus
+    const tmp = document.createElement("input");
+    tmp.style.position = "absolute";
+    tmp.style.opacity = 0;
+    tmp.style.height = 0;
+    tmp.style.width = 0;
+    tmp.style.border = "none";
+    document.body.appendChild(tmp);
+    tmp.focus();
+    setTimeout(() => {
+      tmp.remove();
+      input.focus();
+    }, 50);
+  } else {
+    input.focus();
+  }
+}
+
 // --- Segments / progress bar ---
 export function updateSegments() {
-  // Reset all segments to neutral
   for (let i = 0; i < 10; i++) {
     const seg = document.getElementById("seg" + i);
     if (!seg) continue;
     seg.style.background = "#ccc";
   }
 
-  // Color segments based on stored streak colors
   for (let i = 0; i < gameState.streak; i++) {
     const colorKey = gameState.streakColors[i] || "normal";
     const seg = document.getElementById("seg" + i);
@@ -49,7 +74,6 @@ export function updateSegments() {
     seg.style.background = color;
   }
 
-  // Level label and icon
   document.getElementById("levelName").textContent =
     LEVEL_NAMES[gameState.levelIndex];
   document.getElementById("levelIcon").textContent =
@@ -103,7 +127,7 @@ export function resetInputAndFeedback(blockFocus) {
 
   input.value = "";
   if (!blockFocus) {
-    input.focus();
+    focusInputIOS(); // 🔧 now uses iOS-safe focus
     input.select();
   }
 

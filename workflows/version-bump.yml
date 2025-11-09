@@ -1,0 +1,67 @@
+name: 🔄 Version Bump & Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🧩 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🧮 Read current version
+        id: version
+        run: |
+          if [ -f VERSION.txt ]; then
+            VERSION=$(cat VERSION.txt)
+          else
+            VERSION="1.0.0"
+          fi
+          echo "Current version: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: 🚀 Bump patch version
+        id: bump
+        run: |
+          IFS='.' read -r major minor patch <<< "${{ steps.version.outputs.version }}"
+          patch=$((patch + 1))
+          NEW_VERSION="${major}.${minor}.${patch}"
+          echo "$NEW_VERSION" > VERSION.txt
+          echo "New version: $NEW_VERSION"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: 💾 Commit and push new version
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add VERSION.txt
+          git commit -m "🔖 Bump version to ${{ steps.bump.outputs.new_version }}"
+          git push
+
+  deploy:
+    needs: bump-version
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🧩 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🌐 Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: 📦 Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4

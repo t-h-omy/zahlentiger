@@ -30,7 +30,8 @@ export function focusInputIOS() {
   const input = document.getElementById("eingabe");
   if (!input) return;
 
-  const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  const isiOS = /iPad|iPhone|iPod/.test(ua);
 
   if (isiOS) {
     // Trick: short-lived invisible input to unlock keyboard focus

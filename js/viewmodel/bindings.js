@@ -22,6 +22,7 @@ export function setupBindings() {
   }
 
   if (muteBtn) {
-    muteBtn.onclick = () => toggleMute();
+    // Pass the button element so audio.toggleMute can update its textContent
+    muteBtn.onclick = () => toggleMute(muteBtn);
   }
 }

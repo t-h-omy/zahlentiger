@@ -1,67 +1,33 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Zahlentiger</title>
-
-  <!-- 🎨 Styles -->
-  <link rel="stylesheet" href="./css/styles.css" />
-
-  <!-- 📱 PWA Manifest -->
-  <link rel="manifest" href="./manifest.json" />
-  <meta name="theme-color" content="#ffcc00" />
-
-  <!-- 🐯 Icons -->
-  <link rel="apple-touch-icon" href="./assets/icons/icon_192.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon_192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/icon_512.png" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
-  <!-- 🎮 Game Area -->
-  <canvas id="confetti-canvas"></canvas>
-  <div id="levelUpFlash"></div>
-  <div id="mascotOverlay"><span id="mascot">🐶</span></div>
+  <!-- 🔊 Ton-aus Button oben rechts -->
+  <button id="soundToggle" class="top-right">🔈 Ton aus</button>
 
-  <div id="container">
-    <div id="topBar">
-      <div id="level">
-        <span id="levelIcon">🐶</span>
-        <span id="levelName">Mathe-Welpe</span>
-      </div>
+  <main>
+    <h1 id="levelName"></h1>
+    <div id="levelIcon"></div>
 
-      <div id="segmentContainer">
-        <div class="seg" id="seg0"></div>
-        <div class="seg" id="seg1"></div>
-        <div class="seg" id="seg2"></div>
-        <div class="seg" id="seg3"></div>
-        <div class="seg" id="seg4"></div>
-        <div class="seg" id="seg5"></div>
-        <div class="seg" id="seg6"></div>
-        <div class="seg" id="seg7"></div>
-        <div class="seg" id="seg8"></div>
-        <div class="seg" id="seg9"></div>
-      </div>
-
-      <div id="statusBadge"></div>
-    </div>
-
-    <button id="muteBtn">🔊 Ton aus</button>
     <div id="aufgabe"></div>
 
-    <div id="inputRow">
-      <input id="eingabe" type="number" inputmode="numeric" placeholder="Antwort..." />
-      <button id="checkBtn">OK</button>
+    <input id="eingabe" type="text" placeholder="Antwort eingeben" />
+    <div id="feedback"></div>
+
+    <div id="controls">
+      <button id="nextTask">Nächste Aufgabe</button>
     </div>
 
-    <div id="feedback"></div>
-  </div>
+    <div id="statusBadge"></div>
 
-  <!-- 🧠 Main JavaScript entry point -->
-  <script type="module" src="./js/main.js"></script>
+    <div id="levelUpFlash"></div>
+  </main>
 
-  <!-- 🔧 PWA Service Worker registration -->
-  <script type="module" src="./js/viewmodel/sw-register.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>

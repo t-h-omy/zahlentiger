@@ -95,8 +95,8 @@ body {
 /* Mute button: visually smaller but same colors/behavior as OK */
 #muteBtn {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: max(10px, env(safe-area-inset-top));
+  right: max(10px, env(safe-area-inset-right));
   z-index: 1000;
   font-size: 1rem;       /* intentionally smaller */
   padding: 8px 14px;     /* intentionally smaller */

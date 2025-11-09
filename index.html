@@ -76,5 +76,14 @@
   <!-- 🧠 JavaScript entry point -->
   <!-- Loads the MVVM setup: ViewModel → Model + View -->
   <script type="module" src="./js/main.js"></script>
+
+  <!-- 🔧 Register Service Worker -->
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(() => console.log('Service Worker registered'))
+      .catch(err => console.error('Service Worker registration failed:', err));
+  }
+  </script>
 </body>
 </html>

@@ -1,16 +1,46 @@
 /* === styles.css – Teil 2a: Grundlayout, Farben, Container === */
 
+/* === Design Token System for Kids-Friendly UI === */
+/* 
+ * This token system provides a consistent, reusable color palette 
+ * and styling variables for child-friendly UI components.
+ * 
+ * Usage:
+ *   - Use these CSS custom properties throughout the app
+ *   - To extend: add new tokens following the naming pattern
+ *   - For new components: reference these tokens to maintain consistency
+ */
 :root {
   color-scheme: light dark;
+  
+  /* Color Tokens */
+  --kids-color-primary: #ffb703;      /* Warm yellow - main accent */
+  --kids-color-secondary: #8ecae6;    /* Calming blue - secondary accent */
+  --kids-color-accent: #ff6b6b;       /* Soft coral - error/attention */
+  --kids-color-surface: #ffffff;      /* Cards / bubble background */
+  --kids-color-bg: #f7fbff;           /* App background (very light) */
+  --kids-color-text: #121214;         /* Readable primary text */
+  
+  /* Spacing & Shape Tokens */
+  --kids-radius: 14px;                /* Border radius for rounded corners */
+  --kids-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);  /* Soft shadow */
+  --kids-focus: rgba(94, 156, 255, 0.26);  /* Focus ring color */
+  
+  /* Interactive Element Sizing */
+  --kids-touch-target: 46px;          /* Minimum touch target size */
+  --kids-spacing-sm: 8px;
+  --kids-spacing-md: 12px;
+  --kids-spacing-lg: 18px;
 }
 
 /* Page base */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 18px;
+  padding: var(--kids-spacing-lg);
   text-align: center;
-  background: #fafafa;
+  background: var(--kids-color-bg);
+  color: var(--kids-color-text);
 }
 
 #container, #app {
@@ -58,15 +88,54 @@ body {
   min-width: 0;
   font-size: 2.2rem;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: var(--kids-radius);
   border: 2px solid transparent;
   box-sizing: border-box;
+  background: var(--kids-color-surface);
+  color: var(--kids-color-text);
+  box-shadow: var(--kids-shadow);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#eingabe:focus {
+  outline: none;
+  border-color: var(--kids-color-secondary);
+  box-shadow: 0 0 0 3px var(--kids-focus), var(--kids-shadow);
+}
+
+#eingabe::placeholder {
+  color: #999;
+  opacity: 0.7;
 }
 
 #checkBtn {
   font-size: 1.6rem;
   padding: 14px 22px;
-  border-radius: 14px;
+  border-radius: var(--kids-radius);
+  background: var(--kids-color-primary);
+  color: var(--kids-color-text);
+  border: none;
+  font-weight: bold;
+  min-height: var(--kids-touch-target);
+  cursor: pointer;
+  box-shadow: var(--kids-shadow);
+  transition: transform 0.1s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+#checkBtn:hover {
+  background: #ffa500;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  transform: translateY(-1px);
+}
+
+#checkBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+#checkBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--kids-focus), var(--kids-shadow);
 }
 
 /* 🎯 Mute button (neu positioniert oben rechts) */
@@ -78,16 +147,31 @@ body {
   font-size: 1rem;
   padding: 8px 14px;
   border-radius: 10px;
-  background: #eee;
-  border: 1px solid #ccc;
+  background: var(--kids-color-surface);
+  border: 2px solid #e5e7eb;
+  color: var(--kids-color-text);
   cursor: pointer;
-  transition: background 0.2s ease;
-  /* alte Margin entfernt */
+  min-height: var(--kids-touch-target);
+  box-shadow: var(--kids-shadow);
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
   margin: 0;
+  font-weight: 600;
 }
 
 #muteBtn:hover {
-  background: #ddd;
+  background: #f3f4f6;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+}
+
+#muteBtn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+#muteBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--kids-focus), var(--kids-shadow);
 }
 
 /* Feedback text */
@@ -150,20 +234,23 @@ body {
 
 /* Super-Streak (Blau) */
 .badge-super {
-  background: #e7f0ff;
-  color: #0050c8;
+  background: #e0f2fe;
+  color: #0369a1;
+  border: 2px solid var(--kids-color-secondary);
 }
 
 /* Mega-Streak (Lila) */
 .badge-mega {
-  background: #efe1ff;
-  color: #6a00d6;
+  background: #f3e8ff;
+  color: #7c3aed;
+  border: 2px solid #a78bfa;
 }
 
 /* Rettet-den-Streak (Orange) */
 .badge-rescue {
-  background: #ffe7cc;
-  color: #b34700;
+  background: #fff7ed;
+  color: #c2410c;
+  border: 2px solid var(--kids-color-accent);
 }
 
 /* Erstes Auftreten von Super/Mega: blinkende Animation */
@@ -294,18 +381,49 @@ button {
 #inputRow {
   position: sticky;
   bottom: 0;
-  background: #fafafa;
+  background: var(--kids-color-bg);
   padding-bottom: 10px;
   z-index: 20;
 }
 
 /* Support for dark/light theme sensors */
 @media (prefers-color-scheme: dark) {
-  body {
-    background: #1c1c1c;
-    color: #f4f4f4;
+  :root {
+    /* Dark mode token overrides */
+    --kids-color-primary: #fbbf24;      /* Slightly softer yellow for dark mode */
+    --kids-color-secondary: #67b7dc;    /* Adjusted blue for dark backgrounds */
+    --kids-color-accent: #f87171;       /* Brighter coral for visibility */
+    --kids-color-surface: #2d2d2d;      /* Dark surface */
+    --kids-color-bg: #1a1a1a;           /* Dark background */
+    --kids-color-text: #f4f4f4;         /* Light text */
+    --kids-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);  /* Darker shadow */
   }
+  
+  body {
+    background: var(--kids-color-bg);
+    color: var(--kids-color-text);
+  }
+  
   #inputRow {
-    background: #1c1c1c;
+    background: var(--kids-color-bg);
+  }
+  
+  #eingabe {
+    background: var(--kids-color-surface);
+    color: var(--kids-color-text);
+  }
+  
+  #eingabe::placeholder {
+    color: #aaa;
+  }
+  
+  #muteBtn {
+    background: var(--kids-color-surface);
+    border-color: #444;
+    color: var(--kids-color-text);
+  }
+  
+  #muteBtn:hover {
+    background: #3a3a3a;
   }
 }

@@ -57,7 +57,8 @@ export function updateSegments() {
   for (let i = 0; i < 10; i++) {
     const seg = document.getElementById("seg" + i);
     if (!seg) continue;
-    seg.style.background = "#3A3F41";  // Gray - inactive
+    seg.style.backgroundImage = "url('./assets/icons/icon_paw_grey.png')";
+    seg.style.opacity = "0.6";
   }
 
   for (let i = 0; i < gameState.streak; i++) {
@@ -65,13 +66,19 @@ export function updateSegments() {
     const seg = document.getElementById("seg" + i);
     if (!seg) continue;
 
-    const color =
-      colorKey === "purple" ? STREAK_COLORS.purple :
-      colorKey === "blue"   ? STREAK_COLORS.blue   :
-      colorKey === "orange" ? STREAK_COLORS.orange :
-      STREAK_COLORS.normal;
+    let pawIcon = "";
+    if (colorKey === "purple") {
+      pawIcon = "url('./assets/icons/icon_paw_purple.png')";
+    } else if (colorKey === "blue") {
+      pawIcon = "url('./assets/icons/icon_paw_green.png')"; // Super-Streak uses green paw
+    } else if (colorKey === "orange") {
+      pawIcon = "url('./assets/icons/icon_paw_blue.png')"; // Frozen/Rescue uses blue paw
+    } else {
+      pawIcon = "url('./assets/icons/icon_paw_orange.png')"; // Normal active uses orange paw
+    }
 
-    seg.style.background = color;
+    seg.style.backgroundImage = pawIcon;
+    seg.style.opacity = "1";
   }
 
   document.getElementById("levelName").textContent =

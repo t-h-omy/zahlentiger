@@ -311,7 +311,7 @@ body {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('../assets/icons/icon_paw_grey.png');
+  background-image: url('../assets/icons/paw_grey_256.png');
   transition: transform 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
@@ -324,31 +324,31 @@ body {
 
 /* State 1: Inactive (Gray Paw) */
 .seg[data-state="inactive"] {
-  background-image: url('../assets/icons/icon_paw_grey.png');
+  background-image: url('../assets/icons/paw_grey_256.png');
   opacity: 0.6;
 }
 
 /* State 2: Active/Normal (Orange Paw) */
 .seg[data-state="active"] {
-  background-image: url('../assets/icons/icon_paw_orange.png');
+  background-image: url('../assets/icons/paw_orange_256.png');
   opacity: 1;
 }
 
 /* State 3: Super-Streak (Green Paw) */
 .seg[data-state="super"] {
-  background-image: url('../assets/icons/icon_paw_green.png');
+  background-image: url('../assets/icons/paw_green_256.png');
   opacity: 1;
 }
 
 /* State 4: Mega-Streak (Purple Paw) */
 .seg[data-state="mega"] {
-  background-image: url('../assets/icons/icon_paw_purple.png');
+  background-image: url('../assets/icons/paw_purple_256.png');
   opacity: 1;
 }
 
 /* State 5: Frozen (Blue Paw) */
 .seg[data-state="frozen"] {
-  background-image: url('../assets/icons/icon_paw_blue.png');
+  background-image: url('../assets/icons/paw_blue_256.png');
   opacity: 1;
   animation: frozenPulse 1.5s ease-in-out infinite;
 }
@@ -365,11 +365,11 @@ body {
 
 @keyframes unfreezeTransition {
   0% { 
-    background-image: url('../assets/icons/icon_paw_blue.png');
+    background-image: url('../assets/icons/paw_blue_256.png');
     opacity: 1;
   }
   100% { 
-    background-image: url('../assets/icons/icon_paw_orange.png');
+    background-image: url('../assets/icons/paw_orange_256.png');
     opacity: 1;
   }
 }

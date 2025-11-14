@@ -57,7 +57,7 @@ export function updateSegments() {
   for (let i = 0; i < 10; i++) {
     const seg = document.getElementById("seg" + i);
     if (!seg) continue;
-    seg.style.backgroundImage = "url('./assets/icons/icon_paw_grey.png')";
+    seg.style.backgroundImage = "url('./assets/icons/paw_grey_256.png')";
     seg.style.opacity = "0.6";
   }
 
@@ -68,13 +68,13 @@ export function updateSegments() {
 
     let pawIcon = "";
     if (colorKey === "purple") {
-      pawIcon = "url('./assets/icons/icon_paw_purple.png')";
+      pawIcon = "url('./assets/icons/paw_purple_256.png')";
     } else if (colorKey === "blue") {
-      pawIcon = "url('./assets/icons/icon_paw_green.png')"; // Super-Streak uses green paw
+      pawIcon = "url('./assets/icons/paw_green_256.png')"; // Super-Streak uses green paw
     } else if (colorKey === "orange") {
-      pawIcon = "url('./assets/icons/icon_paw_blue.png')"; // Frozen/Rescue uses blue paw
+      pawIcon = "url('./assets/icons/paw_blue_256.png')"; // Frozen/Rescue uses blue paw
     } else {
-      pawIcon = "url('./assets/icons/icon_paw_orange.png')"; // Normal active uses orange paw
+      pawIcon = "url('./assets/icons/paw_orange_256.png')"; // Normal active uses orange paw
     }
 
     seg.style.backgroundImage = pawIcon;

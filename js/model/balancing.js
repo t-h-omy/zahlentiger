@@ -35,10 +35,11 @@ export const BADGE_THRESHOLDS = {
 };
 
 export const STREAK_COLORS = {
-  normal: "#00c400",    // green
-  purple: "#a200ff",
-  blue:   "#006cff",
-  orange: "#ff8800"
+  normal: "#F7A11B",    // Tiger-Orange - normal active
+  green: "#F7A11B",     // Tiger-Orange - normal active (alias)
+  purple: "#C47CFF",    // Purple - Mega-Streak (chainCount >= 8)
+  blue:   "#4CAF50",    // Green - Super-Streak (chainCount >= 4)
+  orange: "#4FA8FF"     // Blue - frozen/rescue mode (will transition in CSS)
 };
 
 export const BADGE_COLORS = {

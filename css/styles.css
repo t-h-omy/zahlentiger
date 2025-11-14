@@ -1,46 +1,62 @@
-/* === styles.css – Teil 2a: Grundlayout, Farben, Container === */
+/* === styles.css – Tiger Theme Design System === */
 
-/* === Design Token System for Kids-Friendly UI === */
+/* 🐯 Tiger Theme Design Tokens */
 /* 
- * This token system provides a consistent, reusable color palette 
- * and styling variables for child-friendly UI components.
+ * Warm, friendly Tiger-themed design system for child-friendly math learning.
+ * Colors inspired by tiger stripes: dark charcoal with warm orange accents.
  * 
  * Usage:
  *   - Use these CSS custom properties throughout the app
- *   - To extend: add new tokens following the naming pattern
- *   - For new components: reference these tokens to maintain consistency
+ *   - Colors are carefully chosen for readability on dark backgrounds
+ *   - Progress bar colors must remain distinct for different states
  */
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
   
-  /* Color Tokens */
-  --kids-color-primary: #ffb703;      /* Warm yellow - main accent */
-  --kids-color-secondary: #8ecae6;    /* Calming blue - secondary accent */
-  --kids-color-accent: #ff6b6b;       /* Soft coral - error/attention */
-  --kids-color-surface: #ffffff;      /* Cards / bubble background */
-  --kids-color-bg: #f7fbff;           /* App background (very light) */
-  --kids-color-text: #121214;         /* Readable primary text */
+  /* Tiger Theme Color Tokens */
+  --tiger-bg: #1F2326;                /* Dark charcoal background */
+  --tiger-text: #FFF7E5;              /* Soft cream text */
+  --tiger-orange: #F7A11B;            /* Tiger-Orange primary accent */
+  --tiger-surface: #FDF6ED;           /* Soft cream input surfaces */
+  --tiger-surface-text: #1F2326;      /* Dark text on cream surfaces */
+  --tiger-error: #E25D5D;             /* Soft red for errors */
+  
+  /* Progress Bar State Colors - Must be clearly distinct */
+  --progress-inactive: #3A3F41;       /* Gray - inactive segments */
+  --progress-active: #F7A11B;         /* Tiger-Orange - normal active */
+  --progress-super: #4CAF50;          /* Green - super streak */
+  --progress-mega: #C47CFF;           /* Purple - mega streak */
+  --progress-frozen: #4FA8FF;         /* Blue - frozen state */
   
   /* Spacing & Shape Tokens */
-  --kids-radius: 14px;                /* Border radius for rounded corners */
-  --kids-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);  /* Soft shadow */
-  --kids-focus: rgba(94, 156, 255, 0.26);  /* Focus ring color */
+  --tiger-radius: 16px;               /* Border radius for rounded corners */
+  --tiger-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);  /* Warm shadow */
+  --tiger-glow: 0 0 20px rgba(247, 161, 27, 0.3); /* Orange glow effect */
   
   /* Interactive Element Sizing */
-  --kids-touch-target: 46px;          /* Minimum touch target size */
-  --kids-spacing-sm: 8px;
-  --kids-spacing-md: 12px;
-  --kids-spacing-lg: 18px;
+  --tiger-touch-target: 48px;         /* Minimum touch target size */
+  --tiger-spacing-sm: 10px;
+  --tiger-spacing-md: 16px;
+  --tiger-spacing-lg: 24px;
 }
 
-/* Page base */
+/* Page base - Tiger Theme */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', 'Baloo 2', 'Nunito', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0;
-  padding: var(--kids-spacing-lg);
+  padding: var(--tiger-spacing-lg);
   text-align: center;
-  background: var(--kids-color-bg);
-  color: var(--kids-color-text);
+  background: var(--tiger-bg);
+  color: var(--tiger-text);
+  /* Subtle tiger stripe texture */
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(247, 161, 27, 0.02) 40px,
+      rgba(247, 161, 27, 0.02) 80px
+    );
 }
 
 #container, #app {
@@ -56,230 +72,365 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: var(--tiger-spacing-lg);
 }
 
-/* Level display */
+/* Level display - Centered animal icon with level name */
 #level {
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: bold;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: var(--tiger-spacing-sm);
+  margin-bottom: var(--tiger-spacing-md);
 }
 
-/* Task text */
+#levelIcon {
+  font-size: 3.5rem;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+#levelName {
+  color: var(--tiger-orange);
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Task text - Large, cream-colored math question */
 #aufgabe {
-  font-size: 2rem;
-  margin: 12px 0;
+  font-size: 3rem;
+  margin: var(--tiger-spacing-lg) 0;
   word-wrap: break-word;
+  color: var(--tiger-text);
+  font-weight: 600;
+  letter-spacing: 2px;
+  line-height: 1.3;
 }
 
 /* Input row */
 #inputRow {
   display: flex;
   width: 100%;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
+/* Input field - Soft cream background */
 #eingabe {
   flex: 1;
   min-width: 0;
-  font-size: 2.2rem;
-  padding: 12px;
-  border-radius: var(--kids-radius);
-  border: 2px solid transparent;
+  font-size: 2.5rem;
+  padding: 16px 20px;
+  border-radius: var(--tiger-radius);
+  border: 3px solid transparent;
   box-sizing: border-box;
-  background: var(--kids-color-surface);
-  color: var(--kids-color-text);
-  box-shadow: var(--kids-shadow);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: var(--tiger-surface);
+  color: var(--tiger-surface-text);
+  box-shadow: var(--tiger-shadow);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  font-weight: 600;
 }
 
 #eingabe:focus {
   outline: none;
-  border-color: var(--kids-color-secondary);
-  box-shadow: 0 0 0 3px var(--kids-focus), var(--kids-shadow);
+  border-color: var(--tiger-orange);
+  box-shadow: var(--tiger-glow), var(--tiger-shadow);
+  transform: translateY(-2px);
 }
 
 #eingabe::placeholder {
   color: #999;
-  opacity: 0.7;
+  opacity: 0.6;
+  font-weight: 400;
 }
 
+/* Correct answer feedback - green flash */
+#eingabe.correct-flash {
+  animation: correctFlash 0.6s ease-out;
+}
+
+@keyframes correctFlash {
+  0%, 100% { border-color: transparent; }
+  50% { 
+    border-color: var(--progress-super);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+  }
+}
+
+/* Incorrect answer feedback - shake + red border */
+#eingabe.incorrect-shake {
+  animation: incorrectShake 0.5s ease-out;
+}
+
+@keyframes incorrectShake {
+  0%, 100% { transform: translateX(0); border-color: transparent; }
+  10%, 30%, 50%, 70%, 90% { 
+    transform: translateX(-8px);
+    border-color: var(--tiger-error);
+  }
+  20%, 40%, 60%, 80% { 
+    transform: translateX(8px);
+    border-color: var(--tiger-error);
+  }
+}
+
+/* OK Button - Tiger-Orange with bounce animation */
 #checkBtn {
-  font-size: 1.6rem;
-  padding: 14px 22px;
-  border-radius: var(--kids-radius);
-  background: var(--kids-color-primary);
-  color: var(--kids-color-text);
+  font-size: 1.8rem;
+  padding: 16px 32px;
+  border-radius: var(--tiger-radius);
+  background: var(--tiger-orange);
+  color: white;
   border: none;
-  font-weight: bold;
-  min-height: var(--kids-touch-target);
+  font-weight: 700;
+  min-height: var(--tiger-touch-target);
   cursor: pointer;
-  box-shadow: var(--kids-shadow);
-  transition: transform 0.1s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-shadow: var(--tiger-shadow);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 #checkBtn:hover {
-  background: #ffa500;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
-  transform: translateY(-1px);
+  background: #FFB84D;
+  box-shadow: var(--tiger-glow), var(--tiger-shadow);
+  transform: translateY(-3px);
 }
 
 #checkBtn:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  animation: bouncePress 0.3s ease-out;
+}
+
+@keyframes bouncePress {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.92); }
+  100% { transform: scale(0.95); }
 }
 
 #checkBtn:focus {
   outline: none;
-  box-shadow: 0 0 0 3px var(--kids-focus), var(--kids-shadow);
+  box-shadow: 0 0 0 4px rgba(247, 161, 27, 0.4), var(--tiger-shadow);
 }
 
-/* 🎯 Mute button (neu positioniert oben rechts) */
+/* 🎯 Mute button - Dark themed */
 #muteBtn {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 12px;
+  right: 12px;
   z-index: 1000;
   font-size: 1rem;
-  padding: 8px 14px;
-  border-radius: 10px;
-  background: var(--kids-color-surface);
-  border: 2px solid #e5e7eb;
-  color: var(--kids-color-text);
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: rgba(253, 246, 237, 0.15);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(247, 161, 27, 0.3);
+  color: var(--tiger-text);
   cursor: pointer;
-  min-height: var(--kids-touch-target);
-  box-shadow: var(--kids-shadow);
-  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  min-height: var(--tiger-touch-target);
+  box-shadow: var(--tiger-shadow);
+  transition: background 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
   margin: 0;
   font-weight: 600;
 }
 
 #muteBtn:hover {
-  background: #f3f4f6;
-  transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  background: rgba(253, 246, 237, 0.25);
+  border-color: var(--tiger-orange);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
 #muteBtn:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 #muteBtn:focus {
   outline: none;
-  box-shadow: 0 0 0 3px var(--kids-focus), var(--kids-shadow);
+  box-shadow: 0 0 0 3px rgba(247, 161, 27, 0.4);
 }
 
 /* Feedback text */
 #feedback {
-  margin-top: 12px;
-  font-size: 1.4rem;
+  margin-top: var(--tiger-spacing-md);
+  font-size: 1.5rem;
   min-height: 2rem;
+  font-weight: 600;
 }
 
-.ok { color: #128a12; font-weight: bold; }
-.enc { color: #ff8800; font-weight: bold; }
-.no  { color: #d40000; font-weight: bold; }
+.ok { 
+  color: var(--progress-super);
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.enc { 
+  color: var(--tiger-orange);
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.no { 
+  color: var(--tiger-error);
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
 
 
 
-/* === styles.css – Teil 2b: Streak-Progressbar & Segmente === */
+/* === Progress Bar with 5 Distinct States === */
 
-/* Container für die 10 Streak-Segmente */
+/* Container for the 10 progress segments */
 #segmentContainer {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  gap: 4px;
-  margin-top: 10px;
+  gap: 6px;
+  margin-top: var(--tiger-spacing-md);
+  padding: 0 4px;
 }
 
-/* Einzelnes Segment */
+/* Individual segment - rounded rectangle with depth */
 .seg {
   flex: 1;
-  height: 26px;
-  border-radius: 6px;
-  background: #ccc;
-  transition: background 0.25s;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--progress-inactive);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Farben:
-   Grün    (#00c400)  – normale richtige Antwort
-   Blau    (#006cff)  – Super Streak
-   Lila    (#a200ff)  – Mega Streak
-   Orange  (#ff8800)  – geretteter Streak
-*/
+.seg:hover {
+  transform: translateY(-1px);
+}
+
+/* 5 Progress Bar States - Clearly Distinct Colors */
+
+/* State 1: Inactive (Gray) */
+.seg[data-state="inactive"] {
+  background: var(--progress-inactive);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* State 2: Active/Normal (Tiger-Orange) */
+.seg[data-state="active"] {
+  background: var(--progress-active);
+  box-shadow: 0 2px 8px rgba(247, 161, 27, 0.4);
+}
+
+/* State 3: Super-Streak (Green) */
+.seg[data-state="super"] {
+  background: var(--progress-super);
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.4);
+}
+
+/* State 4: Mega-Streak (Purple) */
+.seg[data-state="mega"] {
+  background: var(--progress-mega);
+  box-shadow: 0 2px 8px rgba(196, 124, 255, 0.4);
+}
+
+/* State 5: Frozen (Blue) */
+.seg[data-state="frozen"] {
+  background: var(--progress-frozen);
+  box-shadow: 0 2px 8px rgba(79, 168, 255, 0.4);
+  animation: frozenPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes frozenPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Unfreeze animation - blue to orange transition */
+.seg[data-state="unfreezing"] {
+  animation: unfreezeTransition 0.8s ease-out forwards;
+}
+
+@keyframes unfreezeTransition {
+  0% { 
+    background: var(--progress-frozen);
+    box-shadow: 0 2px 8px rgba(79, 168, 255, 0.4);
+  }
+  100% { 
+    background: var(--progress-active);
+    box-shadow: 0 2px 8px rgba(247, 161, 27, 0.4);
+  }
+}
 
 
-/* === styles.css – Teil 2c: Badges (Super, Mega, Rescue) & Animationen === */
+/* === Badges (Super, Mega, Rescue) & Animations === */
 
-/* Bereich über der Streak-Leiste */
+/* Badge container area */
 #statusBadge {
-  margin-top: 10px;
-  min-height: 1.9rem;
+  margin-top: var(--tiger-spacing-md);
+  min-height: 2rem;
   font-weight: bold;
 }
 
-/* Basis-Badge-Design */
+/* Base badge design */
 .badge {
   display: inline-block;
-  padding: 6px 12px;
+  padding: 8px 16px;
   border-radius: 999px;
   font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: var(--tiger-shadow);
 }
 
-/* Super-Streak (Blau) */
+/* Super-Streak (Green) */
 .badge-super {
-  background: #e0f2fe;
-  color: #0369a1;
-  border: 2px solid var(--kids-color-secondary);
+  background: var(--progress-super);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Mega-Streak (Lila) */
+/* Mega-Streak (Purple) */
 .badge-mega {
-  background: #f3e8ff;
-  color: #7c3aed;
-  border: 2px solid #a78bfa;
+  background: var(--progress-mega);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Rettet-den-Streak (Orange) */
+/* Rescue Badge (Orange with warning) */
 .badge-rescue {
-  background: #fff7ed;
-  color: #c2410c;
-  border: 2px solid var(--kids-color-accent);
+  background: var(--tiger-orange);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.4);
 }
 
-/* Erstes Auftreten von Super/Mega: blinkende Animation */
+/* First appearance: blinking animation */
 .blink {
   animation: badgeBlink 1000ms ease-in-out 2;
 }
 
 @keyframes badgeBlink {
-  0%   { transform: scale(1);    filter: brightness(1); }
-  25%  { transform: scale(1.10); filter: brightness(1.3); }
-  50%  { transform: scale(1);    filter: brightness(1); }
-  75%  { transform: scale(1.10); filter: brightness(1.3); }
-  100% { transform: scale(1);    filter: brightness(1); }
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  25%, 75% { transform: scale(1.15); filter: brightness(1.4); }
+  50% { transform: scale(1); filter: brightness(1); }
 }
 
-/* Rettet-den-Streak sollte pulsieren */
+/* Rescue mode: pulsing animation */
 .rescuePulse {
   animation: rescueBlink 1200ms ease-in-out infinite alternate;
 }
 
 @keyframes rescueBlink {
-  0%   { transform: scale(1);    filter: brightness(1); }
-  100% { transform: scale(1.06); filter: brightness(1.25); }
+  0% { transform: scale(1); filter: brightness(1); }
+  100% { transform: scale(1.08); filter: brightness(1.3); }
 }
 
 
-/* === styles.css – Teil 2d: Konfetti, Level-Up-Overlay & Maskottchen-Animation === */
+/* === Confetti, Level-Up Overlay & Mascot Animation === */
 
-/* Vollbild-Canvas für Konfetti */
+/* Full-screen canvas for confetti */
 #confetti-canvas {
   position: fixed;
   left: 0;
@@ -290,30 +441,34 @@ body {
   z-index: 9999;
 }
 
-/* Level-Up Gold-Overlay */
+/* Level-Up Flash - Tiger-Orange themed */
 #levelUpFlash {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(255,215,0,0.65);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(247, 161, 27, 0.75);
   display: none;
   text-align: center;
   padding-top: 40vh;
-  font-size: 2.1rem;
+  font-size: 2.5rem;
   font-weight: bold;
+  color: white;
   pointer-events: none;
   z-index: 9998;
   animation: goldHold 4000ms ease-out;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 @keyframes goldHold {
-  0%   { opacity: 0; }
-  15%  { opacity: 1; }
-  85%  { opacity: 1; }
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
   100% { opacity: 0; }
 }
 
-/* Maskottchen-Overlay */
+/* Mascot overlay animation */
 #mascotOverlay {
   position: fixed;
   bottom: 18vh;
@@ -327,35 +482,36 @@ body {
 }
 
 #mascot {
-  font-size: 72px;
+  font-size: 80px;
   display: inline-block;
   opacity: 0;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
 }
 
-/* Höherer Sprung + weiches Bouncing */
+/* Bouncy jump animation */
 .mascotJump {
   animation: mascotJump 1500ms ease-out forwards;
 }
 
 @keyframes mascotJump {
-  0%   { transform: translateY(260px) scaleY(0.85); opacity: 0; }
-  18%  { transform: translateY(-80px) scaleY(1.22); opacity: 1; }
-  36%  { transform: translateY(0)     scaleY(0.90); }
-  60%  { transform: translateY(-30px) scaleY(1.10); }
-  80%  { transform: translateY(0)     scaleY(0.97); }
-  100% { transform: translateY(0)     scaleY(1.00); opacity: 1; }
+  0% { transform: translateY(280px) scaleY(0.85); opacity: 0; }
+  18% { transform: translateY(-90px) scaleY(1.25); opacity: 1; }
+  36% { transform: translateY(0) scaleY(0.88); }
+  60% { transform: translateY(-35px) scaleY(1.12); }
+  80% { transform: translateY(0) scaleY(0.96); }
+  100% { transform: translateY(0) scaleY(1.00); opacity: 1; }
 }
 
 
-/* === styles.css – Teil 2e: Mobile-Optimierungen === */
+/* === Mobile Optimizations === */
 
 /* Safe-area handling for iOS notches */
 body {
-  padding-top: env(safe-area-inset-top, 18px);
-  padding-bottom: env(safe-area-inset-bottom, 18px);
+  padding-top: env(safe-area-inset-top, var(--tiger-spacing-lg));
+  padding-bottom: env(safe-area-inset-bottom, var(--tiger-spacing-lg));
 }
 
-/* Prevent layout shifting when the on-screen keyboard appears */
+/* Prevent layout shifting when keyboard appears */
 html, body {
   height: 100%;
   overflow-x: hidden;
@@ -367,12 +523,12 @@ input, button {
   touch-action: manipulation;
 }
 
-/* Larger touch targets */
+/* Larger touch targets for children */
 button {
-  min-height: 46px;
+  min-height: var(--tiger-touch-target);
 }
 
-/* Prevent mobile 'double-tap zoom' */
+/* Prevent mobile double-tap zoom */
 * {
   touch-action: pan-y;
 }
@@ -381,49 +537,43 @@ button {
 #inputRow {
   position: sticky;
   bottom: 0;
-  background: var(--kids-color-bg);
-  padding-bottom: 10px;
+  background: var(--tiger-bg);
+  padding-bottom: var(--tiger-spacing-md);
   z-index: 20;
 }
 
-/* Support for dark/light theme sensors */
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark mode token overrides */
-    --kids-color-primary: #fbbf24;      /* Slightly softer yellow for dark mode */
-    --kids-color-secondary: #67b7dc;    /* Adjusted blue for dark backgrounds */
-    --kids-color-accent: #f87171;       /* Brighter coral for visibility */
-    --kids-color-surface: #2d2d2d;      /* Dark surface */
-    --kids-color-bg: #1a1a1a;           /* Dark background */
-    --kids-color-text: #f4f4f4;         /* Light text */
-    --kids-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);  /* Darker shadow */
-  }
-  
-  body {
-    background: var(--kids-color-bg);
-    color: var(--kids-color-text);
-  }
-  
-  #inputRow {
-    background: var(--kids-color-bg);
+/* Version display - subtle in corner */
+#appVersion {
+  position: fixed;
+  bottom: 5px;
+  right: 10px;
+  font-size: 11px;
+  color: rgba(255, 247, 229, 0.4);
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 480px) {
+  #aufgabe {
+    font-size: 2.5rem;
   }
   
   #eingabe {
-    background: var(--kids-color-surface);
-    color: var(--kids-color-text);
+    font-size: 2rem;
+    padding: 14px 16px;
   }
   
-  #eingabe::placeholder {
-    color: #aaa;
+  #checkBtn {
+    font-size: 1.6rem;
+    padding: 14px 24px;
   }
   
-  #muteBtn {
-    background: var(--kids-color-surface);
-    border-color: #444;
-    color: var(--kids-color-text);
+  #levelIcon {
+    font-size: 3rem;
   }
   
-  #muteBtn:hover {
-    background: #3a3a3a;
+  #levelName {
+    font-size: 1.5rem;
   }
 }

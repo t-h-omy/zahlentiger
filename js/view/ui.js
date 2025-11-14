@@ -57,7 +57,7 @@ export function updateSegments() {
   for (let i = 0; i < 10; i++) {
     const seg = document.getElementById("seg" + i);
     if (!seg) continue;
-    seg.style.background = "#ccc";
+    seg.style.background = "#3A3F41";  // Gray - inactive
   }
 
   for (let i = 0; i < gameState.streak; i++) {

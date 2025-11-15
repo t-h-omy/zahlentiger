@@ -1,7 +1,7 @@
 // === service-worker.js ===
 // Handles offline caching and automatic version update detection.
 
-const CACHE_NAME = 'zahlentiger-cache-v1';
+const CACHE_NAME = 'zahlentiger-cache-v3';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -19,7 +19,13 @@ const CORE_ASSETS = [
   './assets/icons/icon_192.png',
   './assets/icons/icon_256.png',
   './assets/icons/icon_384.png',
-  './assets/icons/icon_512.png'
+  './assets/icons/icon_512.png',
+  // 🐾 Progress bar paw icons (256x256 versions)
+  './assets/icons/paw_grey_256.png',
+  './assets/icons/paw_orange_256.png',
+  './assets/icons/paw_green_256.png',
+  './assets/icons/paw_blue_256.png',
+  './assets/icons/paw_purple_256.png'
 ];
 
 // Install phase – cache all core assets
@@ -40,11 +46,36 @@ self.addEventListener('activate', event => {
     }).then(() => self.clients.claim())
   );
 });
-// Fetch phase – serve from cache, then network fallback
+// Fetch phase – network-first for HTML/CSS, cache-first for other assets
 self.addEventListener('fetch', event => {
-  event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
-  );
+  const url = new URL(event.request.url);
+  
+  // Network-first strategy for HTML and CSS to ensure updates
+  if (event.request.destination === 'document' || 
+      event.request.destination === 'style' ||
+      url.pathname.endsWith('.html') || 
+      url.pathname.endsWith('.css')) {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          // Cache the new version
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseClone);
+          });
+          return response;
+        })
+        .catch(() => {
+          // Fall back to cache if network fails
+          return caches.match(event.request);
+        })
+    );
+  } else {
+    // Cache-first for other assets (images, icons, scripts)
+    event.respondWith(
+      caches.match(event.request).then(response => response || fetch(event.request))
+    );
+  }
 });
 
 // === Version check (for update notification) ===

@@ -3,26 +3,26 @@
 /* 🐯 Tiger Theme Design Tokens */
 /* 
  * Warm, friendly Tiger-themed design system for child-friendly math learning.
- * Colors inspired by tiger stripes: dark charcoal with warm orange accents.
+ * Colors inspired by tiger stripes: clean white with warm orange accents.
  * 
  * Usage:
  *   - Use these CSS custom properties throughout the app
- *   - Colors are carefully chosen for readability on dark backgrounds
+ *   - Colors are carefully chosen for readability on light backgrounds
  *   - Progress bar colors must remain distinct for different states
  */
 :root {
-  color-scheme: dark;
+  color-scheme: light;
   
   /* Tiger Theme Color Tokens */
-  --tiger-bg: #1F2326;                /* Dark charcoal background */
-  --tiger-text: #FFF7E5;              /* Soft cream text */
+  --tiger-bg: #FFFFFF;                /* White background */
+  --tiger-text: #1F2326;              /* Dark text for readability */
   --tiger-orange: #F7A11B;            /* Tiger-Orange primary accent */
   --tiger-surface: #FDF6ED;           /* Soft cream input surfaces */
   --tiger-surface-text: #1F2326;      /* Dark text on cream surfaces */
   --tiger-error: #E25D5D;             /* Soft red for errors */
   
   /* Progress Bar State Colors - Must be clearly distinct */
-  --progress-inactive: #3A3F41;       /* Gray - inactive segments */
+  --progress-inactive: #CCCCCC;       /* Light gray - inactive segments */
   --progress-active: #F7A11B;         /* Tiger-Orange - normal active */
   --progress-super: #4CAF50;          /* Green - super streak */
   --progress-mega: #C47CFF;           /* Purple - mega streak */
@@ -30,7 +30,7 @@
   
   /* Spacing & Shape Tokens */
   --tiger-radius: 16px;               /* Border radius for rounded corners */
-  --tiger-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);  /* Warm shadow */
+  --tiger-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);  /* Lighter shadow for light background */
   --tiger-glow: 0 0 20px rgba(247, 161, 27, 0.3); /* Orange glow effect */
   
   /* Interactive Element Sizing */
@@ -44,27 +44,25 @@
 body {
   font-family: 'Segoe UI', 'Baloo 2', 'Nunito', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0;
-  padding: var(--tiger-spacing-lg);
+  padding: 0 var(--tiger-spacing-lg) var(--tiger-spacing-lg);
   text-align: center;
   background: var(--tiger-bg);
   color: var(--tiger-text);
-  /* Subtle tiger stripe texture */
-  background-image: 
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 40px,
-      rgba(247, 161, 27, 0.02) 40px,
-      rgba(247, 161, 27, 0.02) 80px
-    );
+  /* Prevent layout shift on keyboard open: use large viewport height */
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for modern browsers */
 }
 
 #container, #app {
   max-width: 540px;
   margin: auto;
   width: 100%;
-  /* 👇 Platz für fixierten Button oben */
+  /* 👇 Space for fixed "Ton Aus" button and mascot alignment */
   margin-top: 60px;
+  padding: 0 var(--tiger-spacing-lg);
+  position: relative;
+  box-sizing: border-box;
+  overflow: visible;
 }
 
 /* Top bar */
@@ -73,6 +71,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: var(--tiger-spacing-lg);
+  padding-top: 0;
 }
 
 /* Level display - Centered animal icon with level name */
@@ -84,6 +83,7 @@ body {
   align-items: center;
   gap: var(--tiger-spacing-sm);
   margin-bottom: var(--tiger-spacing-md);
+  margin-top: -48px; /* Pull up to align with "Ton Aus" button */
 }
 
 #levelIcon {
@@ -135,6 +135,9 @@ body {
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
   font-weight: 600;
   -moz-appearance: textfield; /* Firefox */
+  /* Prevent scroll-into-view on focus */
+  scroll-margin: 0;
+  scroll-snap-align: none;
 }
 
 /* Remove spinner arrows from number input */
@@ -227,7 +230,7 @@ body {
   box-shadow: 0 0 0 4px rgba(247, 161, 27, 0.4), var(--tiger-shadow);
 }
 
-/* 🎯 Mute button - Dark themed */
+/* 🎯 Mute button - Light themed */
 #muteBtn {
   position: fixed;
   top: 12px;
@@ -236,7 +239,7 @@ body {
   font-size: 1rem;
   padding: 10px 16px;
   border-radius: 12px;
-  background: rgba(253, 246, 237, 0.15);
+  background: rgba(247, 161, 27, 0.1);
   backdrop-filter: blur(10px);
   border: 2px solid rgba(247, 161, 27, 0.3);
   color: var(--tiger-text);
@@ -249,10 +252,10 @@ body {
 }
 
 #muteBtn:hover {
-  background: rgba(253, 246, 237, 0.25);
+  background: rgba(247, 161, 27, 0.2);
   border-color: var(--tiger-orange);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 #muteBtn:active {
@@ -298,7 +301,7 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  gap: 6px;
+  gap: 4px;
   margin-top: var(--tiger-spacing-md);
   padding: 0 4px;
 }
@@ -527,7 +530,7 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Reduce accidental zoom on mobile */
+/* Reduce accidental zoom on mobile and prevent double-tap zoom */
 input, button {
   font-size: 1rem;
   touch-action: manipulation;
@@ -538,27 +541,13 @@ button {
   min-height: var(--tiger-touch-target);
 }
 
-/* Prevent mobile double-tap zoom */
-* {
-  touch-action: pan-y;
-}
-
-/* Keep input visible above keyboard */
-#inputRow {
-  position: sticky;
-  bottom: 0;
-  background: var(--tiger-bg);
-  padding-bottom: var(--tiger-spacing-md);
-  z-index: 20;
-}
-
 /* Version display - subtle in corner */
 #appVersion {
   position: fixed;
   bottom: 5px;
   right: 10px;
   font-size: 11px;
-  color: rgba(255, 247, 229, 0.4);
+  color: rgba(31, 35, 38, 0.4);
   opacity: 0.7;
   font-weight: 500;
 }

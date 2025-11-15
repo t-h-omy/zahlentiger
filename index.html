@@ -13,7 +13,8 @@
   <meta name="theme-color" content="#ffcc00" />
 
   <!-- 🐯 Icons -->
-  <link rel="apple-touch-icon" href="./assets/icons/icon_192.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="./assets/icons/icon_48.png" />
+  <link rel="apple-touch-icon" href="./assets/icons/icon_180.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/icon_192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/icon_512.png" />
 </head>
@@ -23,6 +24,11 @@
   <canvas id="confetti-canvas"></canvas>
   <div id="levelUpFlash"></div>
   <div id="mascotOverlay"><span id="mascot">🐶</span></div>
+
+  <!-- 🔊 Ton-aus-Button oben rechts -->
+  <div id="topRight">
+    <button id="muteBtn">🔊 Ton aus</button>
+  </div>
 
   <div id="container">
     <div id="topBar">
@@ -47,7 +53,7 @@
       <div id="statusBadge"></div>
     </div>
 
-    <button id="muteBtn">🔊 Ton aus</button>
+    <!-- 🔇 Button wurde hier entfernt -->
     <div id="aufgabe"></div>
 
     <div id="inputRow">
@@ -63,5 +69,12 @@
 
   <!-- 🔧 PWA Service Worker registration -->
   <script type="module" src="./js/viewmodel/sw-register.js"></script>
+
+  <!-- 📦 Version Footer -->
+  <div id="appVersion"
+       style="position:fixed; bottom:5px; right:10px;
+              font-size:12px; color:#666; opacity:0.7;">
+    ...
+  </div>
 </body>
 </html>

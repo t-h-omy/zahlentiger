@@ -3,6 +3,7 @@
 
 import { checkAnswer } from "./gameEngine.js";
 import { toggleMute } from "../view/audio.js";
+import { focusInputIOS } from "../view/ui.js"; // 👈 added
 
 export function setupBindings() {
   const checkBtn = document.getElementById("checkBtn");
@@ -11,6 +12,7 @@ export function setupBindings() {
 
   if (checkBtn) {
     checkBtn.onclick = () => checkAnswer();
+    checkBtn.ontouchstart = () => focusInputIOS(); // 👈 ensures keyboard opens on touch
   }
 
   if (input) {
@@ -20,6 +22,6 @@ export function setupBindings() {
   }
 
   if (muteBtn) {
-    muteBtn.onclick = () => toggleMute(muteBtn);
+    muteBtn.onclick = () => toggleMute();
   }
 }

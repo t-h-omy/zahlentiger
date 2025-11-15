@@ -1,5 +1,5 @@
 // === view/ui.js ===
-// Pure DOM updates: segments, badges, task text, level labels.
+// Pure DOM updates: segments, badges, task text, level labels, version info, iOS focus helper.
 
 import {
   LEVEL_NAMES,
@@ -10,36 +10,84 @@ import {
 } from "../model/balancing.js";
 import { gameState } from "../model/state.js";
 
+// --- Display app version from VERSION.txt ---
+export async function updateVersionDisplay() {
+  const el = document.getElementById("appVersion");
+  if (!el) return;
+  try {
+    const res = await fetch("./VERSION.txt", { cache: "no-store" });
+    if (!res.ok) throw new Error("VERSION.txt not found");
+    const version = (await res.text()).trim();
+    el.textContent = "v" + version;
+  } catch (err) {
+    console.warn("[UI] Version info unavailable:", err);
+    el.textContent = "Dev-Version";
+  }
+}
+
+// --- iOS Keyboard Focus Helper ---
+export function focusInputIOS() {
+  const input = document.getElementById("eingabe");
+  if (!input) return;
+
+  const ua = navigator.userAgent || navigator.vendor || window.opera;
+  const isiOS = /iPad|iPhone|iPod/.test(ua);
+
+  if (isiOS) {
+    // Trick: short-lived invisible input to unlock keyboard focus
+    const tmp = document.createElement("input");
+    tmp.style.position = "absolute";
+    tmp.style.opacity = 0;
+    tmp.style.height = 0;
+    tmp.style.width = 0;
+    tmp.style.border = "none";
+    document.body.appendChild(tmp);
+    tmp.focus();
+    setTimeout(() => {
+      tmp.remove();
+      input.focus();
+    }, 50);
+  } else {
+    input.focus();
+  }
+}
+
+// --- Segments / progress bar ---
 export function updateSegments() {
-  // Reset all segments to neutral
   for (let i = 0; i < 10; i++) {
     const seg = document.getElementById("seg" + i);
     if (!seg) continue;
-    seg.style.background = "#ccc";
+    seg.style.backgroundImage = "url('./assets/icons/paw_grey_256.png')";
+    seg.style.opacity = "0.6";
   }
 
-  // Color segments based on stored streak colors
   for (let i = 0; i < gameState.streak; i++) {
     const colorKey = gameState.streakColors[i] || "normal";
     const seg = document.getElementById("seg" + i);
     if (!seg) continue;
 
-    const color =
-      colorKey === "purple" ? STREAK_COLORS.purple :
-      colorKey === "blue"   ? STREAK_COLORS.blue   :
-      colorKey === "orange" ? STREAK_COLORS.orange :
-      STREAK_COLORS.normal;
+    let pawIcon = "";
+    if (colorKey === "purple") {
+      pawIcon = "url('./assets/icons/paw_purple_256.png')";
+    } else if (colorKey === "blue") {
+      pawIcon = "url('./assets/icons/paw_green_256.png')"; // Super-Streak uses green paw
+    } else if (colorKey === "orange") {
+      pawIcon = "url('./assets/icons/paw_blue_256.png')"; // Frozen/Rescue uses blue paw
+    } else {
+      pawIcon = "url('./assets/icons/paw_orange_256.png')"; // Normal active uses orange paw
+    }
 
-    seg.style.background = color;
+    seg.style.backgroundImage = pawIcon;
+    seg.style.opacity = "1";
   }
 
-  // Level label and icon
   document.getElementById("levelName").textContent =
     LEVEL_NAMES[gameState.levelIndex];
   document.getElementById("levelIcon").textContent =
     LEVEL_ICONS[gameState.levelIndex];
 }
 
+// --- Badges ---
 export function updateBadge() {
   const badge = document.getElementById("statusBadge");
   badge.innerHTML = "";
@@ -57,6 +105,7 @@ export function updateBadge() {
   }
 }
 
+// --- Badge blink animation ---
 export function triggerBadgeBlink(kind) {
   const badge = document.querySelector("#statusBadge .badge");
   if (!badge) return;
@@ -72,18 +121,20 @@ export function triggerBadgeBlink(kind) {
   }
 }
 
+// --- Task display ---
 export function setTaskText(text) {
   const el = document.getElementById("aufgabe");
   if (el) el.textContent = text;
 }
 
+// --- Input & feedback handling ---
 export function resetInputAndFeedback(blockFocus) {
   const input = document.getElementById("eingabe");
   if (!input) return;
 
   input.value = "";
   if (!blockFocus) {
-    input.focus();
+    focusInputIOS(); // 🔧 now uses iOS-safe focus
     input.select();
   }
 
@@ -101,6 +152,7 @@ export function setFeedback(text, className) {
   fb.className = className || "";
 }
 
+// --- Level-up flash ---
 export function showLevelUpFlash(newLevelName) {
   const flash = document.getElementById("levelUpFlash");
   if (!flash) return;

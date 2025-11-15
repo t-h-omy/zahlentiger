@@ -25,9 +25,31 @@
   <div id="levelUpFlash"></div>
   <div id="mascotOverlay"><span id="mascot">🐶</span></div>
 
-  <!-- 🔊 Ton-aus-Button oben rechts -->
+  <!-- 🍔 Burger Menu Button oben rechts -->
   <div id="topRight">
-    <button id="muteBtn">🔊 Ton aus</button>
+    <button id="burgerMenuBtn" aria-label="Menü öffnen">
+      <span class="burger-icon"></span>
+    </button>
+  </div>
+
+  <!-- 📋 Settings Popup Modal -->
+  <div id="settingsModal" class="modal" style="display: none;">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Einstellungen</h2>
+        <button id="closeModalBtn" class="close-btn" aria-label="Menü schließen">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="setting-item">
+          <span class="setting-label">Ton</span>
+          <button id="soundToggleBtn" class="sound-toggle" data-sound-enabled="true">
+            <span class="sound-icon">🔊</span>
+            <span class="sound-text">Ton an</span>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="container">

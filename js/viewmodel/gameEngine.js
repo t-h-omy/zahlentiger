@@ -130,7 +130,7 @@ function handleCorrect() {
 
 function handleWrong() {
   const fb = document.getElementById("feedback");
-  fb.textContent = "Trage eine Antwort ein ☀️";
+  fb.textContent = "Gleich nochmal 🙂";
   fb.className = "enc";
   playFailSound();
   if (navigator.vibrate) navigator.vibrate(60);
@@ -172,8 +172,13 @@ export function checkAnswer() {
   if (!input) return;
 
   const v = input.value.trim();
-  // Don't evaluate empty input - just keep focus
+  // Show encouragement message for empty input
   if (v === "") {
+    const fb = document.getElementById("feedback");
+    if (fb) {
+      fb.textContent = "Trage eine Antwort ein ☀️";
+      fb.className = "enc";
+    }
     input.focus();
     return;
   }

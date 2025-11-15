@@ -44,7 +44,7 @@
 body {
   font-family: 'Segoe UI', 'Baloo 2', 'Nunito', 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
   margin: 0;
-  padding: var(--tiger-spacing-lg);
+  padding: 0 var(--tiger-spacing-lg) var(--tiger-spacing-lg);
   text-align: center;
   background: var(--tiger-bg);
   color: var(--tiger-text);
@@ -66,9 +66,12 @@ body {
   max-width: 540px;
   margin: auto;
   width: 100%;
-  /* 👇 Reduced to align mascot with "Ton Aus" button */
-  margin-top: 12px;
+  /* 👇 Space for fixed "Ton Aus" button and mascot alignment */
+  margin-top: 60px;
+  padding: 0 var(--tiger-spacing-lg);
   position: relative;
+  box-sizing: border-box;
+  overflow: visible;
 }
 
 /* Top bar */
@@ -77,6 +80,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: var(--tiger-spacing-lg);
+  padding-top: 0;
 }
 
 /* Level display - Centered animal icon with level name */
@@ -88,6 +92,7 @@ body {
   align-items: center;
   gap: var(--tiger-spacing-sm);
   margin-bottom: var(--tiger-spacing-md);
+  margin-top: -48px; /* Pull up to align with "Ton Aus" button */
 }
 
 #levelIcon {

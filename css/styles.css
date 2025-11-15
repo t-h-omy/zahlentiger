@@ -530,7 +530,7 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Reduce accidental zoom on mobile */
+/* Reduce accidental zoom on mobile and prevent double-tap zoom */
 input, button {
   font-size: 1rem;
   touch-action: manipulation;
@@ -539,11 +539,6 @@ input, button {
 /* Larger touch targets for children */
 button {
   min-height: var(--tiger-touch-target);
-}
-
-/* Prevent mobile double-tap zoom */
-* {
-  touch-action: pan-y;
 }
 
 /* Version display - subtle in corner */

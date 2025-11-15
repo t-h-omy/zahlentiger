@@ -145,7 +145,23 @@ export function playLevelUpSound() {
 
 export function toggleMute(buttonElement) {
   gameState.muted = !gameState.muted;
+  
   if (buttonElement) {
-    buttonElement.textContent = gameState.muted ? "🔇 Ton an" : "🔊 Ton aus";
+    // Update button state attribute
+    buttonElement.setAttribute('data-sound-enabled', !gameState.muted);
+    
+    // Update icon and text based on state
+    const icon = buttonElement.querySelector('.sound-icon');
+    const text = buttonElement.querySelector('.sound-text');
+    
+    if (gameState.muted) {
+      // Sound OFF state
+      if (icon) icon.textContent = "🔇";
+      if (text) text.textContent = "Ton aus";
+    } else {
+      // Sound ON state
+      if (icon) icon.textContent = "🔊";
+      if (text) text.textContent = "Ton an";
+    }
   }
 }

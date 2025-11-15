@@ -230,42 +230,224 @@ body {
   box-shadow: 0 0 0 4px rgba(247, 161, 27, 0.4), var(--tiger-shadow);
 }
 
-/* 🎯 Mute button - Light themed */
-#muteBtn {
+/* 🍔 Burger Menu Button - Light themed */
+#burgerMenuBtn {
   position: fixed;
   top: 12px;
   right: 12px;
   z-index: 1000;
-  font-size: 1rem;
-  padding: 10px 16px;
+  width: 48px;
+  height: 48px;
+  padding: 12px;
   border-radius: 12px;
   background: rgba(247, 161, 27, 0.1);
   backdrop-filter: blur(10px);
   border: 2px solid rgba(247, 161, 27, 0.3);
-  color: var(--tiger-text);
   cursor: pointer;
-  min-height: var(--tiger-touch-target);
   box-shadow: var(--tiger-shadow);
   transition: background 0.2s ease, transform 0.15s ease, border-color 0.2s ease;
-  margin: 0;
-  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#muteBtn:hover {
+#burgerMenuBtn:hover {
   background: rgba(247, 161, 27, 0.2);
   border-color: var(--tiger-orange);
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-#muteBtn:active {
+#burgerMenuBtn:active {
   transform: scale(0.95);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-#muteBtn:focus {
+#burgerMenuBtn:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(247, 161, 27, 0.4);
+}
+
+/* Burger Icon (three horizontal lines) */
+.burger-icon {
+  width: 24px;
+  height: 18px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.burger-icon::before,
+.burger-icon::after {
+  content: '';
+  width: 100%;
+  height: 3px;
+  background: var(--tiger-text);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.burger-icon::before {
+  box-shadow: 0 7px 0 var(--tiger-text);
+}
+
+/* 📋 Settings Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  background: var(--tiger-bg);
+  border-radius: var(--tiger-radius);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 400px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 2001;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--tiger-spacing-lg);
+  border-bottom: 2px solid rgba(247, 161, 27, 0.2);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--tiger-orange);
+  font-weight: 700;
+}
+
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: var(--tiger-text);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s ease, transform 0.15s ease;
+  line-height: 1;
+  padding: 0;
+}
+
+.close-btn:hover {
+  background: rgba(247, 161, 27, 0.1);
+  transform: scale(1.1);
+}
+
+.close-btn:active {
+  transform: scale(0.95);
+}
+
+.close-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(247, 161, 27, 0.4);
+}
+
+.modal-body {
+  padding: var(--tiger-spacing-lg);
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--tiger-spacing-md);
+  padding: var(--tiger-spacing-md) 0;
+}
+
+.setting-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--tiger-text);
+}
+
+/* 🔊 Sound Toggle Button - Improved with two distinct states */
+.sound-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  min-height: var(--tiger-touch-target);
+  box-shadow: var(--tiger-shadow);
+}
+
+/* State 1: Sound ON - Green background with speaker icon */
+.sound-toggle[data-sound-enabled="true"] {
+  background: #4CAF50;
+  color: white;
+}
+
+.sound-toggle[data-sound-enabled="true"]:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+}
+
+/* State 2: Sound OFF - Red background with muted speaker icon */
+.sound-toggle[data-sound-enabled="false"] {
+  background: #E25D5D;
+  color: white;
+}
+
+.sound-toggle[data-sound-enabled="false"]:hover {
+  background: #d84949;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(226, 93, 93, 0.4);
+}
+
+.sound-toggle:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.sound-toggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(247, 161, 27, 0.4);
+}
+
+.sound-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.sound-text {
+  font-size: 1rem;
 }
 
 /* Feedback text */

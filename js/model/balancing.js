@@ -4,6 +4,9 @@
 
 export const MAX_STREAK = 10;
 
+// Level-up display duration (ms)
+export const LEVEL_UP_DISPLAY_DURATION = 7000; // Increased from 5200ms for better visibility
+
 export const LEVEL_NAMES = [
   "Mathe-Welpe",
   "Zahlen-Fuchs",

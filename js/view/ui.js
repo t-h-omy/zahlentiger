@@ -6,7 +6,8 @@ import {
   LEVEL_ICONS,
   BADGE_THRESHOLDS,
   STREAK_COLORS,
-  BADGE_COLORS
+  BADGE_COLORS,
+  LEVEL_UP_DISPLAY_DURATION
 } from "../model/balancing.js";
 import { gameState } from "../model/state.js";
 
@@ -155,10 +156,22 @@ export function setFeedback(text, className) {
 // --- Level-up flash ---
 export function showLevelUpFlash(newLevelName) {
   const flash = document.getElementById("levelUpFlash");
+  const container = document.getElementById("container");
   if (!flash) return;
+  
   flash.textContent = "Neues Level: " + newLevelName;
   flash.style.display = "block";
+  
+  // Hide main UI during level-up animation
+  if (container) {
+    container.style.display = "none";
+  }
+  
   setTimeout(() => {
     flash.style.display = "none";
-  }, 4000);
+    // Show main UI again after level-up animation
+    if (container) {
+      container.style.display = "block";
+    }
+  }, LEVEL_UP_DISPLAY_DURATION - 1000); // Hide slightly before next task
 }

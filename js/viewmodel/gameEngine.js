@@ -2,7 +2,7 @@
 // Core game flow: checking answers, managing streaks, rescue mode, level ups.
 
 import { gameState, resetLevelProgress } from "../model/state.js";
-import { LEVEL_NAMES, LEVEL_ICONS, MAX_STREAK } from "../model/balancing.js";
+import { LEVEL_NAMES, LEVEL_ICONS, MAX_STREAK, LEVEL_UP_DISPLAY_DURATION } from "../model/balancing.js";
 import { generateTask } from "../model/tasks.js";
 import {
   updateSegments,
@@ -117,7 +117,7 @@ function handleCorrect() {
       gameState.blockFocus = false;
 
       createNewTask();
-    }, 5200);
+    }, LEVEL_UP_DISPLAY_DURATION);
     return;
   }
 
@@ -172,7 +172,18 @@ export function checkAnswer() {
   if (!input) return;
 
   const v = input.value.trim();
-  if (v === "" || !Number.isFinite(Number(v))) {
+  // Show encouragement message for empty input
+  if (v === "") {
+    const fb = document.getElementById("feedback");
+    if (fb) {
+      fb.textContent = "Trage eine Antwort ein ☀️";
+      fb.className = "enc";
+    }
+    input.focus();
+    return;
+  }
+  
+  if (!Number.isFinite(Number(v))) {
     handleWrong();
     return;
   }

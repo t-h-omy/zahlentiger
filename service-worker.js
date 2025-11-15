@@ -1,7 +1,7 @@
 // === service-worker.js ===
 // Handles offline caching and automatic version update detection.
 
-const CACHE_NAME = 'zahlentiger-cache-v1';
+const CACHE_NAME = 'zahlentiger-cache-v2';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -19,7 +19,13 @@ const CORE_ASSETS = [
   './assets/icons/icon_192.png',
   './assets/icons/icon_256.png',
   './assets/icons/icon_384.png',
-  './assets/icons/icon_512.png'
+  './assets/icons/icon_512.png',
+  // 🐾 Progress bar paw icons (256x256 versions)
+  './assets/icons/paw_grey_256.png',
+  './assets/icons/paw_orange_256.png',
+  './assets/icons/paw_green_256.png',
+  './assets/icons/paw_blue_256.png',
+  './assets/icons/paw_purple_256.png'
 ];
 
 // Install phase – cache all core assets

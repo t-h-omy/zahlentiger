@@ -65,6 +65,9 @@ body {
   width: 100%;
   /* 👇 Platz für fixierten Button oben */
   margin-top: 60px;
+  overflow-y: auto;
+  max-height: 100vh;
+  position: relative;
 }
 
 /* Top bar */
@@ -84,6 +87,7 @@ body {
   align-items: center;
   gap: var(--tiger-spacing-sm);
   margin-bottom: var(--tiger-spacing-md);
+  margin-top: -48px; /* Align mascot with "Ton Aus" button top spacing */
 }
 
 #levelIcon {
@@ -298,7 +302,7 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  gap: 6px;
+  gap: 4px;
   margin-top: var(--tiger-spacing-md);
   padding: 0 4px;
 }
@@ -525,6 +529,9 @@ body {
 html, body {
   height: 100%;
   overflow-x: hidden;
+  position: fixed;
+  width: 100%;
+  overscroll-behavior: none;
 }
 
 /* Reduce accidental zoom on mobile */
@@ -541,15 +548,6 @@ button {
 /* Prevent mobile double-tap zoom */
 * {
   touch-action: pan-y;
-}
-
-/* Keep input visible above keyboard */
-#inputRow {
-  position: sticky;
-  bottom: 0;
-  background: var(--tiger-bg);
-  padding-bottom: var(--tiger-spacing-md);
-  z-index: 20;
 }
 
 /* Version display - subtle in corner */

@@ -26,7 +26,7 @@ function vibrate(duration) {
 
 function spawnFountain(count, heightScale = 1) {
   const cx = window.innerWidth / 2;
-  const cy = window.innerHeight;
+  const cy = window.innerHeight * 0.65; // Moved up from bottom to encouragement text position
 
   for (let i = 0; i < count; i++) {
     const angle = -Math.PI / 2 + (Math.random() * 0.6 - 0.3);

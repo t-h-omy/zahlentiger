@@ -646,27 +646,27 @@ body {
   background: rgba(247, 161, 27, 0.75);
   display: none;
   text-align: center;
-  padding-top: 40vh;
+  padding-top: 20vh; /* Moved up from 40vh to align with task text area */
   font-size: 2.5rem;
   font-weight: bold;
   color: white;
   pointer-events: none;
   z-index: 9998;
-  animation: goldHold 4000ms ease-out;
+  animation: goldHold 7000ms ease-out; /* Increased from 4000ms for longer visibility */
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 @keyframes goldHold {
   0% { opacity: 0; }
-  15% { opacity: 1; }
-  85% { opacity: 1; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
   100% { opacity: 0; }
 }
 
 /* Mascot overlay animation */
 #mascotOverlay {
   position: fixed;
-  bottom: 18vh;
+  bottom: 50vh; /* Moved up from 18vh to center/task area */
   left: 0;
   width: 100%;
   display: none;

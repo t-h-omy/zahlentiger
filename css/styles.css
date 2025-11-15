@@ -48,6 +48,9 @@ body {
   text-align: center;
   background: var(--tiger-bg);
   color: var(--tiger-text);
+  /* Prevent layout shift on keyboard open: use large viewport height */
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for modern browsers */
   /* Subtle tiger stripe texture */
   background-image: 
     repeating-linear-gradient(
@@ -63,10 +66,8 @@ body {
   max-width: 540px;
   margin: auto;
   width: 100%;
-  /* 👇 Platz für fixierten Button oben */
-  margin-top: 60px;
-  overflow-y: auto;
-  max-height: 100vh;
+  /* 👇 Reduced to align mascot with "Ton Aus" button */
+  margin-top: 12px;
   position: relative;
 }
 
@@ -87,7 +88,6 @@ body {
   align-items: center;
   gap: var(--tiger-spacing-sm);
   margin-bottom: var(--tiger-spacing-md);
-  margin-top: -48px; /* Align mascot with "Ton Aus" button top spacing */
 }
 
 #levelIcon {
@@ -139,6 +139,9 @@ body {
   transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
   font-weight: 600;
   -moz-appearance: textfield; /* Firefox */
+  /* Prevent scroll-into-view on focus */
+  scroll-margin: 0;
+  scroll-snap-align: none;
 }
 
 /* Remove spinner arrows from number input */
@@ -529,9 +532,6 @@ body {
 html, body {
   height: 100%;
   overflow-x: hidden;
-  position: fixed;
-  width: 100%;
-  overscroll-behavior: none;
 }
 
 /* Reduce accidental zoom on mobile */

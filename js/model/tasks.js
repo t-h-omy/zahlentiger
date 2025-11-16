@@ -20,17 +20,17 @@ function genAddition(cfg) {
   const wantCarry = Math.random() < cfg.addCarryP;
 
   for (let t = 0; t < 200; t++) {
-    let a = randInt(0, max);
-    let b = randInt(0, max - a);
+    let a = randInt(1, max); // Start from 1 to avoid zero
+    let b = randInt(1, max - a); // Start from 1 to avoid zero
     const carry = ((a % 10) + (b % 10)) >= 10;
 
     if (wantCarry && carry) return { text: `${a} + ${b}`, result: a + b };
     if (!wantCarry && !carry) return { text: `${a} + ${b}`, result: a + b };
   }
 
-  // Fallback, same behavior as original
-  let a = randInt(0, Math.floor(max / 2));
-  let b = randInt(0, Math.min(max - a, Math.floor(max / 2)));
+  // Fallback, avoid zero
+  let a = randInt(1, Math.floor(max / 2));
+  let b = randInt(1, Math.min(max - a, Math.floor(max / 2)));
   return { text: `${a} + ${b}`, result: a + b };
 }
 
@@ -39,17 +39,19 @@ function genSubtraction(cfg) {
   const wantBorrow = Math.random() < cfg.subBorrowP;
 
   for (let t = 0; t < 200; t++) {
-    let a = randInt(0, max);
-    let b = randInt(0, a);
+    let a = randInt(1, max); // Start from 1 to avoid zero
+    let b = randInt(1, a); // Start from 1 to avoid zero and ensure result > 0
+    const result = a - b;
+    if (result === 0) continue; // Skip if result is zero
     const borrow = (a % 10) < (b % 10);
 
-    if (wantBorrow && borrow) return { text: `${a} − ${b}`, result: a - b };
-    if (!wantBorrow && !borrow) return { text: `${a} − ${b}`, result: a - b };
+    if (wantBorrow && borrow) return { text: `${a} − ${b}`, result: result };
+    if (!wantBorrow && !borrow) return { text: `${a} − ${b}`, result: result };
   }
 
-  // Fallback
-  let a = randInt(0, max);
-  let b = randInt(0, a);
+  // Fallback, avoid zero
+  let a = randInt(2, max); // Start from 2 to ensure b can be at least 1
+  let b = randInt(1, a - 1); // Ensure result is at least 1
   return { text: `${a} − ${b}`, result: a - b };
 }
 

@@ -86,7 +86,7 @@ function handleCorrect() {
   gameState.streakColors[gameState.streak] = newColor;
   gameState.streak++;
 
-  updateSegments();
+  updateSegments(true); // Pass true to indicate a new paw was added
   updateBadge();
 
   if (crossed === "mega") {

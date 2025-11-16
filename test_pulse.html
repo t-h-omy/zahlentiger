@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+:root {
+  --paw-pulse-scale: 3.0; /* Test with large value */
+}
+
+@keyframes newPawPulse {
+  0% { transform: scale(1); background: red; }
+  50% { transform: scale(var(--paw-pulse-scale, 1.15)); background: green; }
+  100% { transform: scale(1); background: red; }
+}
+
+.test-box {
+  width: 100px;
+  height: 100px;
+  background: blue;
+  margin: 50px;
+}
+
+.test-box.animate {
+  animation: newPawPulse 2s ease-in-out;
+}
+</style>
+</head>
+<body>
+<h1>Pulse Animation Test</h1>
+<div class="test-box" id="box"></div>
+<button onclick="document.getElementById('box').classList.add('animate')">Animate</button>
+<button onclick="document.getElementById('box').classList.remove('animate')">Reset</button>
+<p>CSS Variable: <span id="var"></span></p>
+<script>
+document.getElementById('var').textContent = getComputedStyle(document.documentElement).getPropertyValue('--paw-pulse-scale');
+</script>
+</body>
+</html>

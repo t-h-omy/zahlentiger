@@ -56,6 +56,85 @@ body {
   min-height: 100dvh; /* Dynamic viewport height for modern browsers */
 }
 
+/* === Main Menu === */
+#mainMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: var(--tiger-bg);
+  z-index: 5000;
+}
+
+#mainMenu.hidden {
+  display: none;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--tiger-spacing-lg);
+  padding: var(--tiger-spacing-lg);
+  max-width: 540px;
+  width: 100%;
+}
+
+.menu-title {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--tiger-orange);
+  margin: 0;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  letter-spacing: 2px;
+}
+
+.menu-button {
+  font-size: 2rem;
+  font-weight: 700;
+  padding: 20px 48px;
+  border-radius: var(--tiger-radius);
+  background: var(--tiger-orange);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--tiger-shadow);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-height: var(--tiger-touch-target);
+}
+
+.menu-button:hover {
+  background: #FFB84D;
+  box-shadow: var(--tiger-glow), var(--tiger-shadow);
+  transform: translateY(-3px);
+}
+
+.menu-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.menu-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(247, 161, 27, 0.4), var(--tiger-shadow);
+}
+
+/* Hide game UI when in menu mode */
+body.menu-mode #container {
+  display: none;
+}
+
+body.menu-mode #topRight {
+  display: none;
+}
+
 #container, #app {
   max-width: 540px;
   margin: auto;

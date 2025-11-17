@@ -19,17 +19,52 @@ export const LEVEL_NAMES = [
 export const LEVEL_ICONS = ["🐶", "🦊", "🐯", "🦁", "🐉", "🧙‍♂️"];
 
 // Difficulty per level (taken 1:1 from your original game.js)
+// Addition and subtraction settings remain unchanged
 export const LEVELS = [
-  { addMax: 20,  subMax: 15,  mulMax: 3,  addCarryP: 0.00, subBorrowP: 0.00 },
-  { addMax: 50,  subMax: 40,  mulMax: 4,  addCarryP: 0.25, subBorrowP: 0.05 },
-  { addMax: 80,  subMax: 65,  mulMax: 5,  addCarryP: 0.45, subBorrowP: 0.15 },
-  { addMax: 120, subMax: 100, mulMax: 7,  addCarryP: 0.65, subBorrowP: 0.25 },
-  { addMax: 150, subMax: 120, mulMax: 9,  addCarryP: 0.75, subBorrowP: 0.35 },
-  { addMax: 200, subMax: 160, mulMax: 10, addCarryP: 0.85, subBorrowP: 0.45 }
+  { addMax: 20,  subMax: 15,  addCarryP: 0.00, subBorrowP: 0.00 },
+  { addMax: 50,  subMax: 40,  addCarryP: 0.25, subBorrowP: 0.05 },
+  { addMax: 80,  subMax: 65,  addCarryP: 0.45, subBorrowP: 0.15 },
+  { addMax: 120, subMax: 100, addCarryP: 0.65, subBorrowP: 0.25 },
+  { addMax: 150, subMax: 120, addCarryP: 0.75, subBorrowP: 0.35 },
+  { addMax: 200, subMax: 160, addCarryP: 0.85, subBorrowP: 0.45 }
+];
+
+// Multiplication difficulty per level (new level-based rules)
+export const MULTIPLICATION_LEVELS = [
+  // Level 1: Factor1: 1-3, Factor2: 1-5 or 10 (5 and 10 not allowed as Factor1)
+  { factor1Min: 1, factor1Max: 3, factor2Min: 1, factor2Max: 5, factor2Extra: [10], factor1Exclude: [5, 10] },
+  // Level 2: Factor1: 1-4, Factor2: 1-6 or 10 (5 and 10 not allowed as Factor1)
+  { factor1Min: 1, factor1Max: 4, factor2Min: 1, factor2Max: 6, factor2Extra: [10], factor1Exclude: [5, 10] },
+  // Level 3: Factor1: 1-5, Factor2: 1-7 or 10 (10 not allowed as Factor1)
+  { factor1Min: 1, factor1Max: 5, factor2Min: 1, factor2Max: 7, factor2Extra: [10], factor1Exclude: [10] },
+  // Level 4: Factor1: 1-7, Factor2: 1-8
+  { factor1Min: 1, factor1Max: 7, factor2Min: 1, factor2Max: 8, factor2Extra: [], factor1Exclude: [] },
+  // Level 5: Factor1: 1-10, Factor2: 1-10
+  { factor1Min: 1, factor1Max: 10, factor2Min: 1, factor2Max: 10, factor2Extra: [], factor1Exclude: [] },
+  // Level 6: Factor1: 1-11, Factor2: 1-11
+  { factor1Min: 1, factor1Max: 11, factor2Min: 1, factor2Max: 11, factor2Extra: [], factor1Exclude: [] }
+];
+
+// Division difficulty per level (new level-based rules)
+// Each level is cumulative (includes all previous level tasks)
+// Quotient must be 1-10 for levels 1-5, 1-12 for level 6
+export const DIVISION_LEVELS = [
+  // Level 1: Simple divisions within 1-10
+  { divisorMin: 1, divisorMax: 10, dividendMin: 1, dividendMax: 10, quotientMin: 1, quotientMax: 10 },
+  // Level 2: Level 1 + divisions by 10 (dividend 10-100)
+  { divisorMin: 1, divisorMax: 10, dividendMin: 1, dividendMax: 100, quotientMin: 1, quotientMax: 10 },
+  // Level 3: Level 1-2 + divisor 1-4, dividend up to 50
+  { divisorMin: 1, divisorMax: 10, dividendMin: 1, dividendMax: 50, quotientMin: 1, quotientMax: 10 },
+  // Level 4: Level 1-3 + divisor 1-6, dividend up to 80
+  { divisorMin: 1, divisorMax: 10, dividendMin: 1, dividendMax: 80, quotientMin: 1, quotientMax: 10 },
+  // Level 5: Level 1-4 + divisor 1-10, dividend up to 100
+  { divisorMin: 1, divisorMax: 10, dividendMin: 1, dividendMax: 100, quotientMin: 1, quotientMax: 10 },
+  // Level 6: Level 1-5 + harder tasks (divisor 1-144, quotient 1-12)
+  { divisorMin: 1, divisorMax: 144, dividendMin: 1, dividendMax: 1728, quotientMin: 1, quotientMax: 12 }
 ];
 
 // Global type weights – used by the generator for all levels
-export const TYPE_WEIGHTS = { add: 0.35, sub: 0.35, mul: 0.30 };
+export const TYPE_WEIGHTS = { add: 0.3, sub: 0.3, mul: 0.25, div: 0.15 };
 
 // Streak badge thresholds and colors
 export const BADGE_THRESHOLDS = {

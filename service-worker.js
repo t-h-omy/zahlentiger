@@ -1,7 +1,7 @@
 // === service-worker.js ===
 // Handles offline caching and automatic version update detection.
 
-const CACHE_NAME = 'zahlentiger-cache-v5';
+const CACHE_NAME = 'zahlentiger-cache-v6';
 const CORE_ASSETS = [
   './',
   './index.html',

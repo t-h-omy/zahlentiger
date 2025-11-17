@@ -15,7 +15,7 @@ function pickType() {
   if (selectedOperations.addition) activeOps.push({ type: "add", weight: TYPE_WEIGHTS.add });
   if (selectedOperations.subtraktion) activeOps.push({ type: "sub", weight: TYPE_WEIGHTS.sub });
   if (selectedOperations.multiplikation) activeOps.push({ type: "mul", weight: TYPE_WEIGHTS.mul });
-  if (selectedOperations.division) activeOps.push({ type: "div", weight: TYPE_WEIGHTS.mul }); // Use same weight as mul
+  if (selectedOperations.division) activeOps.push({ type: "div", weight: TYPE_WEIGHTS.div });
   
   if (activeOps.length === 0) {
     // Fallback: should not happen, but default to addition

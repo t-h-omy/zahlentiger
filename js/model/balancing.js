@@ -64,7 +64,7 @@ export const DIVISION_LEVELS = [
 ];
 
 // Global type weights – used by the generator for all levels
-export const TYPE_WEIGHTS = { add: 0.35, sub: 0.35, mul: 0.30 };
+export const TYPE_WEIGHTS = { add: 0.3, sub: 0.3, mul: 0.25, div: 0.15 };
 
 // Streak badge thresholds and colors
 export const BADGE_THRESHOLDS = {

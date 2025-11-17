@@ -63,4 +63,4 @@ export const VIBRATION = {
 };
 
 // New paw pulse animation config
-export const PAW_PULSE_INTENSITY = 2.0; // Scale multiplier for pulse animation (1.0 = no pulse, 1.15 = 15% larger)
+export const PAW_PULSE_INTENSITY = 1.5; // Scale multiplier for pulse animation (1.0 = no pulse, 1.15 = 15% larger)

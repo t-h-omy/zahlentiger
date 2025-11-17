@@ -20,35 +20,6 @@
 </head>
 
 <body>
-  <!-- 🏠 Main Menu -->
-  <div id="mainMenu">
-    <div class="menu-container">
-      <h1 class="menu-title">Zahlentiger</h1>
-      
-      <!-- 🔢 Operation Selection Buttons -->
-      <div class="operation-selection">
-        <button id="opAddition" class="operation-btn" data-operation="addition" data-active="true">
-          <span class="op-icon">+</span>
-          <span class="op-label">Addition</span>
-        </button>
-        <button id="opSubtraktion" class="operation-btn" data-operation="subtraktion" data-active="true">
-          <span class="op-icon">−</span>
-          <span class="op-label">Subtraktion</span>
-        </button>
-        <button id="opMultiplikation" class="operation-btn" data-operation="multiplikation" data-active="true">
-          <span class="op-icon">×</span>
-          <span class="op-label">Multiplikation</span>
-        </button>
-        <button id="opDivision" class="operation-btn" data-operation="division" data-active="false">
-          <span class="op-icon">÷</span>
-          <span class="op-label">Division</span>
-        </button>
-      </div>
-      
-      <button id="startGameBtn" class="menu-button">Spiel starten</button>
-    </div>
-  </div>
-
   <!-- 🎮 Game Area -->
   <canvas id="confetti-canvas"></canvas>
   <div id="levelUpFlash"></div>
@@ -70,12 +41,38 @@
         <button id="closeModalBtn" class="close-btn" aria-label="Menü schließen">×</button>
       </div>
       <div class="modal-body">
-        <div class="setting-item">
-          <span class="setting-label">Ton</span>
-          <button id="soundToggleBtn" class="sound-toggle" data-sound-enabled="true">
-            <span class="sound-icon">🔊</span>
-            <span class="sound-text">Ton an</span>
-          </button>
+        <!-- 🔢 Operation Selection -->
+        <div class="setting-section">
+          <h3 class="section-title">Rechenarten</h3>
+          <div class="operation-selection-modal">
+            <button id="opAddition" class="operation-btn" data-operation="addition" data-active="true">
+              <span class="op-icon">+</span>
+              <span class="op-label">Addition</span>
+            </button>
+            <button id="opSubtraktion" class="operation-btn" data-operation="subtraktion" data-active="true">
+              <span class="op-icon">−</span>
+              <span class="op-label">Subtraktion</span>
+            </button>
+            <button id="opMultiplikation" class="operation-btn" data-operation="multiplikation" data-active="true">
+              <span class="op-icon">×</span>
+              <span class="op-label">Multiplikation</span>
+            </button>
+            <button id="opDivision" class="operation-btn" data-operation="division" data-active="false">
+              <span class="op-icon">÷</span>
+              <span class="op-label">Division</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 🔊 Sound Settings -->
+        <div class="setting-section">
+          <div class="setting-item">
+            <span class="setting-label">Ton</span>
+            <button id="soundToggleBtn" class="sound-toggle" data-sound-enabled="true">
+              <span class="sound-icon">🔊</span>
+              <span class="sound-text">Ton an</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

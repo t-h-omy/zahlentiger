@@ -85,6 +85,84 @@ body {
   width: 100%;
 }
 
+/* === Operation Selection Buttons === */
+.operation-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.operation-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-radius: var(--tiger-radius);
+  border: 3px solid transparent;
+  cursor: pointer;
+  font-size: 1.2rem;
+  font-weight: 700;
+  min-height: var(--tiger-touch-target);
+  box-shadow: var(--tiger-shadow);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+  text-align: left;
+}
+
+/* ON state - Green background */
+.operation-btn[data-active="true"] {
+  background: #4CAF50;
+  color: white;
+}
+
+.operation-btn[data-active="true"]:hover {
+  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(76, 175, 80, 0.4);
+}
+
+/* OFF state - Red background with strike-through */
+.operation-btn[data-active="false"] {
+  background: #E25D5D;
+  color: white;
+}
+
+.operation-btn[data-active="false"]:hover {
+  background: #d84949;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(226, 93, 93, 0.4);
+}
+
+.operation-btn[data-active="false"] .op-icon {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.operation-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.operation-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(247, 161, 27, 0.4), var(--tiger-shadow);
+}
+
+.op-icon {
+  font-size: 2rem;
+  font-weight: bold;
+  min-width: 40px;
+  text-align: center;
+}
+
+.op-label {
+  flex: 1;
+  text-align: left;
+  padding-left: 16px;
+  letter-spacing: 0.5px;
+}
+
 .menu-title {
   font-size: 4rem;
   font-weight: 800;

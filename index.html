@@ -24,7 +24,28 @@
   <div id="mainMenu">
     <div class="menu-container">
       <h1 class="menu-title">Zahlentiger</h1>
-      <button id="startGameBtn" class="menu-button">Start Game</button>
+      
+      <!-- 🔢 Operation Selection Buttons -->
+      <div class="operation-selection">
+        <button id="opAddition" class="operation-btn" data-operation="addition" data-active="true">
+          <span class="op-icon">+</span>
+          <span class="op-label">Addition</span>
+        </button>
+        <button id="opSubtraktion" class="operation-btn" data-operation="subtraktion" data-active="true">
+          <span class="op-icon">−</span>
+          <span class="op-label">Subtraktion</span>
+        </button>
+        <button id="opMultiplikation" class="operation-btn" data-operation="multiplikation" data-active="true">
+          <span class="op-icon">×</span>
+          <span class="op-label">Multiplikation</span>
+        </button>
+        <button id="opDivision" class="operation-btn" data-operation="division" data-active="false">
+          <span class="op-icon">÷</span>
+          <span class="op-label">Division</span>
+        </button>
+      </div>
+      
+      <button id="startGameBtn" class="menu-button">Spiel starten</button>
     </div>
   </div>
 

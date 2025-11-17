@@ -54,7 +54,7 @@ export function focusInputIOS() {
 }
 
 // --- Segments / progress bar ---
-export function updateSegments(newPawAdded = false) {
+export function updateSegments(newPawAdded = false, pawFrozen = false) {
   for (let i = 0; i < 10; i++) {
     const seg = document.getElementById("seg" + i);
     if (!seg) continue;
@@ -84,6 +84,11 @@ export function updateSegments(newPawAdded = false) {
     
     // Add pulse animation to the newly added paw (last one in streak)
     if (newPawAdded && i === gameState.streak - 1) {
+      seg.classList.add("new-paw-pulse");
+    }
+    
+    // Add pulse animation to frozen paw
+    if (pawFrozen && i === gameState.rescueIndex) {
       seg.classList.add("new-paw-pulse");
     }
   }

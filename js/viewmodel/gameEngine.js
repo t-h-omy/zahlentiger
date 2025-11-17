@@ -158,7 +158,7 @@ function handleWrong() {
     gameState.rescueIndex = gameState.streak - 1;
     gameState.streakColors[gameState.rescueIndex] = "orange";
     gameState.chainCount = 0;
-    updateSegments();
+    updateSegments(false, true); // Pass true to indicate a paw was frozen
     updateBadge();
     return;
   }

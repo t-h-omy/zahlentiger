@@ -5,6 +5,7 @@ import { checkAnswer } from "./gameEngine.js";
 import { toggleMute } from "../view/audio.js";
 import { focusInputIOS } from "../view/ui.js";
 import { openSettingsModal, closeSettingsModal } from "../view/modal.js";
+import { selectedOperations, toggleOperation, hasActiveOperation } from "../model/operations.js";
 
 export function setupBindings() {
   const checkBtn = document.getElementById("checkBtn");
@@ -44,4 +45,25 @@ export function setupBindings() {
   if (soundToggleBtn) {
     soundToggleBtn.onclick = () => toggleMute(soundToggleBtn);
   }
+
+  // Set up operation toggle buttons in modal
+  const operationButtons = document.querySelectorAll(".operation-btn");
+  operationButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const operation = btn.dataset.operation;
+      toggleOperation(operation);
+      
+      // Update button visual state
+      const isActive = selectedOperations[operation];
+      btn.dataset.active = isActive.toString();
+      
+      // Ensure at least one operation is selected
+      if (!hasActiveOperation()) {
+        alert("Mindestens eine Rechenart muss aktiviert sein!");
+        // Revert the toggle
+        toggleOperation(operation);
+        btn.dataset.active = selectedOperations[operation].toString();
+      }
+    });
+  });
 }

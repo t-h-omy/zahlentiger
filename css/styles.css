@@ -38,6 +38,9 @@
   --tiger-spacing-sm: 10px;
   --tiger-spacing-md: 16px;
   --tiger-spacing-lg: 24px;
+  
+  /* Paw Pulse Animation */
+  --paw-pulse-scale: 1.15;            /* Scale multiplier for new paw pulse animation */
 }
 
 /* Page base - Tiger Theme */
@@ -82,7 +85,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: var(--tiger-spacing-sm);
-  margin-bottom: var(--tiger-spacing-md);
+  margin-bottom: 4px;  /* Reduced from var(--tiger-spacing-md) (16px) to 4px */
   margin-top: -48px; /* Pull up to align with "Ton Aus" button */
 }
 
@@ -484,15 +487,15 @@ body {
   justify-content: space-between;
   width: 100%;
   gap: 4px;
-  margin-top: var(--tiger-spacing-md);
+  margin-top: 4px;  /* Reduced from var(--tiger-spacing-md) (16px) to 4px */
   padding: 0 4px;
 }
 
 /* Individual segment - paw icon with background image */
 .seg {
   flex: 1;
-  height: 40px;
-  width: 40px;
+  height: 50px;  /* Increased from 40px */
+  width: 50px;   /* Increased from 40px */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -541,6 +544,17 @@ body {
 @keyframes frozenPulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.7; }
+}
+
+/* New paw pulse animation - triggered when a new paw appears */
+@keyframes newPawPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(var(--paw-pulse-scale, 1.15)); }
+  100% { transform: scale(1); }
+}
+
+.seg.new-paw-pulse {
+  animation: newPawPulse 0.6s ease-in-out;
 }
 
 /* Unfreeze animation - blue paw to orange paw transition */

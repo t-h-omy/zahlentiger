@@ -1,7 +1,7 @@
 // === service-worker.js ===
 // Handles offline caching and automatic version update detection.
 
-const CACHE_NAME = 'zahlentiger-cache-v3';
+const CACHE_NAME = 'zahlentiger-cache-v4';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -46,15 +46,17 @@ self.addEventListener('activate', event => {
     }).then(() => self.clients.claim())
   );
 });
-// Fetch phase – network-first for HTML/CSS, cache-first for other assets
+// Fetch phase – network-first for HTML/CSS/JS, cache-first for other assets
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   
-  // Network-first strategy for HTML and CSS to ensure updates
+  // Network-first strategy for HTML, CSS, and JS to ensure updates
   if (event.request.destination === 'document' || 
       event.request.destination === 'style' ||
+      event.request.destination === 'script' ||
       url.pathname.endsWith('.html') || 
-      url.pathname.endsWith('.css')) {
+      url.pathname.endsWith('.css') ||
+      url.pathname.endsWith('.js')) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
@@ -71,7 +73,7 @@ self.addEventListener('fetch', event => {
         })
     );
   } else {
-    // Cache-first for other assets (images, icons, scripts)
+    // Cache-first for other assets (images, icons)
     event.respondWith(
       caches.match(event.request).then(response => response || fetch(event.request))
     );
